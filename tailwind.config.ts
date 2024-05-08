@@ -4,7 +4,9 @@ const config = {
   darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
+    './features/**/*.{ts,tsx}',
+    './entities/**/*.{ts,tsx}',
+    './shared/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
 	],
