@@ -1,8 +1,9 @@
 'use client';
 import { cn } from '@/shared/lib/utils';
+import { IonIcon } from '@/shared/ui/ion-icon';
 import { motion } from 'framer-motion';
-import { ReactNode, useState } from 'react';
-import { BsArrowBarLeft, BsArrowBarRight } from 'react-icons/bs';
+import { ReactNode } from 'react';
+import { useSidebarStore } from '../lib/sidebar-store';
 
 type RootProps = {
     children: ReactNode;
@@ -10,18 +11,28 @@ type RootProps = {
 };
 
 function SideBar({ children, className }: RootProps) {
-    const [collapsed, setCollapsed] = useState(false); // hide/show sidebar completely
-    const [toggled, setToggled] = useState(false); // hide/show sidebar labels
+    const [toggled, toggle] = useSidebarStore((state) => [
+        state.isToggled,
+        state.toggle,
+    ]);
     return (
         <motion.aside
+            animate={{}}
             className={cn(
-                `${toggled ? 'w-64 min-w-64' : 'w-20 min-w-20'}`,
+                `${toggled ? 'w-20 min-w-20' : 'w-64 min-w-64'}`,
                 className,
             )}
         >
             <div className="relative z-10 h-full overflow-y-auto overflow-x-hidden">
-                <button onClick={() => setToggled(!toggled)}>
-                    {toggled ? <BsArrowBarRight /> : <BsArrowBarLeft />}
+                <button onClick={() => toggle()} className="text-secondary">
+                    {toggled ? (
+                        <IonIcon
+                            name="return-down-forward-outline"
+                            size="large"
+                        />
+                    ) : (
+                        <IonIcon name="return-down-back-outline" size="large" />
+                    )}
                 </button>
                 {children}
             </div>
@@ -29,4 +40,38 @@ function SideBar({ children, className }: RootProps) {
     );
 }
 
-export { SideBar };
+function SideBarHeader({ children }: RootProps) {
+    return <div className="p-4">{children}</div>;
+}
+
+function SideBarContent({ children }: RootProps) {
+    return (
+        <nav className="p-4">
+            <ul>{children}</ul>
+        </nav>
+    );
+}
+
+function SideBarFooter({ children }: RootProps) {
+    return <div>{children}</div>;
+}
+
+type SideBarItemProps = {
+    children: ReactNode;
+    icon?: ReactNode;
+    onClick?: () => void;
+};
+
+function SideBarItem({ children, icon, onClick }: SideBarItemProps) {
+    const sidebarIsToggled = useSidebarStore((state) => state.isToggled);
+    return (
+        <li className="text-sm font-medium opacity-85">
+            <a onClick={onClick} className="flex">
+                {icon}
+                {sidebarIsToggled ? null : children}
+            </a>
+        </li>
+    );
+}
+
+export { SideBar, SideBarContent, SideBarFooter, SideBarHeader, SideBarItem };
