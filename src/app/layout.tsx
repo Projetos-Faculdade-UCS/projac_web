@@ -36,9 +36,8 @@ export default function RootLayout({
                         <h1 className="text-white">Header</h1>
                     </SideBarHeader>
                     <SideBarContent>
-                        <SideBarItem>Item 1</SideBarItem>
-                        <SideBarItem>Item 2</SideBarItem>
-                        <SideBarItem>Item 3</SideBarItem>
+                        <SideBarItem href="/projetos">Projetos</SideBarItem>
+                        <SideBarItem href="/projetos/2">Projeto 2</SideBarItem>
                     </SideBarContent>
                     <SideBarFooter>
                         <h1 className="text-white">Footer</h1>

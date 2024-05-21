@@ -2,6 +2,7 @@
 import { cn } from '@/shared/lib/utils';
 import { IonIcon } from '@/shared/ui/ion-icon';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { ReactNode } from 'react';
 import { useSidebarStore } from '../lib/sidebar-store';
 
@@ -58,18 +59,18 @@ function SideBarFooter({ children }: RootProps) {
 
 type SideBarItemProps = {
     children: ReactNode;
+    href: string;
     icon?: ReactNode;
-    onClick?: () => void;
 };
 
-function SideBarItem({ children, icon, onClick }: SideBarItemProps) {
+function SideBarItem({ children, icon, href }: SideBarItemProps) {
     const sidebarIsToggled = useSidebarStore((state) => state.isToggled);
     return (
         <li className="text-sm font-medium opacity-85">
-            <a onClick={onClick} className="flex">
+            <Link href={href} className="flex">
                 {icon}
                 {sidebarIsToggled ? null : children}
-            </a>
+            </Link>
         </li>
     );
 }
