@@ -26,21 +26,13 @@ function SideBar({ children, className }: RootProps) {
         >
             <div className="relative z-10 h-full overflow-y-auto overflow-x-hidden">
                 <button onClick={() => toggle()} className="text-secondary">
-                    {toggled ? (
-                        <IonIcon
-                            name="return-down-forward-outline"
-                            size="large"
-                        />
-                    ) : (
-                        <IonIcon name="return-down-back-outline" size="large" />
-                    )}
+                    <IonIcon name="menu-outline" size="large" />
                 </button>
                 {children}
             </div>
         </motion.aside>
     );
 }
-
 function SideBarHeader({ children }: RootProps) {
     return <div className="p-4">{children}</div>;
 }

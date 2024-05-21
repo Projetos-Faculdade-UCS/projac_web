@@ -31,7 +31,7 @@ export default function RootLayout({
             <body
                 className={`${poppins.className} flex min-h-screen w-full flex-row bg-background`}
             >
-                <SideBar className="bg-red-700">
+                <SideBar className="bg-primary-foreground">
                     <SideBarHeader>
                         <h1 className="text-white">Header</h1>
                     </SideBarHeader>
