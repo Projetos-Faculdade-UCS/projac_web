@@ -1,6 +1,6 @@
 'use client';
 import { cn } from '@/shared/lib/utils';
-import { IonIcon } from '@/shared/ui/ion-icon';
+import { Button } from '@/shared/ui/button';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ReactNode } from 'react';
@@ -25,18 +25,27 @@ function SideBar({ children, className }: RootProps) {
             )}
         >
             <div className="relative z-10 h-full overflow-y-auto overflow-x-hidden">
-                <button onClick={() => toggle()} className="text-secondary">
-                    <IonIcon name="menu-outline" size="large" />
-                </button>
                 {children}
             </div>
         </motion.aside>
     );
 }
 function SideBarHeader({ children }: RootProps) {
-    return <div className="p-4">{children}</div>;
+    return <div className="flex p-4">{children}</div>;
 }
 
+function SidebarTrigger({ children }: RootProps) {
+    const toggle = useSidebarStore((state) => state.toggle);
+    return (
+        <Button
+            onClick={() => toggle()}
+            className="text-secondary"
+            variant={'link'}
+        >
+            {children}
+        </Button>
+    );
+}
 function SideBarContent({ children }: RootProps) {
     return (
         <nav className="p-4">
@@ -58,8 +67,8 @@ type SideBarItemProps = {
 function SideBarItem({ children, icon, href }: SideBarItemProps) {
     const sidebarIsToggled = useSidebarStore((state) => state.isToggled);
     return (
-        <li className="text-sm font-medium opacity-85">
-            <Link href={href} className="flex">
+        <li className="text-base font-medium opacity-85">
+            <Link href={href} className="mx-5 my-4 flex items-center gap-2">
                 {icon}
                 {sidebarIsToggled ? null : children}
             </Link>
@@ -67,4 +76,11 @@ function SideBarItem({ children, icon, href }: SideBarItemProps) {
     );
 }
 
-export { SideBar, SideBarContent, SideBarFooter, SideBarHeader, SideBarItem };
+export {
+    SideBar,
+    SideBarContent,
+    SideBarFooter,
+    SideBarHeader,
+    SideBarItem,
+    SidebarTrigger,
+};

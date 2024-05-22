@@ -4,8 +4,10 @@ import {
     SideBarFooter,
     SideBarHeader,
     SideBarItem,
+    SidebarTrigger,
 } from '@/entities/side-bar/ui';
 import { poppins } from '@/shared/lib/fonts';
+import { IonIcon } from '@/shared/ui/ion-icon';
 import type { Metadata } from 'next';
 import './globals.css';
 
@@ -33,14 +35,31 @@ export default function RootLayout({
             >
                 <SideBar className="bg-primary-foreground">
                     <SideBarHeader>
-                        <h1 className="text-white">Header</h1>
+                        <SidebarTrigger>
+                            <IonIcon name="menu-outline" size="large" />
+                        </SidebarTrigger>
                     </SideBarHeader>
                     <SideBarContent>
-                        <SideBarItem href="/projetos">Projetos</SideBarItem>
+                        <SideBarItem
+                            icon={
+                                <IonIcon name="library-outline" size="large" />
+                            }
+                            href="/projetos"
+                        >
+                            Projetos
+                        </SideBarItem>
+                        <SideBarItem
+                            icon={
+                                <IonIcon name="people-outline" size="large" />
+                            }
+                            href="/pesquisadores"
+                        >
+                            Pesquisadores
+                        </SideBarItem>
                         <SideBarItem href="/projetos/2">Projeto 2</SideBarItem>
                     </SideBarContent>
                     <SideBarFooter>
-                        <h1 className="text-white">Footer</h1>
+                        <h1 className="">Footer</h1>
                     </SideBarFooter>
                 </SideBar>
                 <main className="w-full">{children}</main>
