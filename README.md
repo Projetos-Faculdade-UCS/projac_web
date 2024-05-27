@@ -1,2 +1,2 @@
-# projac-web
+# projac
 Sistema para projetos acadêmicos
