@@ -1,7 +1,7 @@
 'use client';
 import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
-import { HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes, ReactNode, useEffect, useState } from 'react';
 import * as SideBarPrimitive from 'react-pro-sidebar';
 import { useSidebarStore } from '../lib/sidebar-store';
 import './styles.scss';
@@ -12,6 +12,7 @@ type RootProps = SideBarPrimitive.SidebarProps & {
 };
 
 function SideBar({ children, className, ...props }: RootProps) {
+    const [isClientSide, setClientSide] = useState(false);
     const [toggled, collapsed, setToggled, setCollapsed] = useSidebarStore(
         (state) => [
             state.isToggled,
@@ -20,6 +21,13 @@ function SideBar({ children, className, ...props }: RootProps) {
             state.setCollapsed,
         ],
     );
+    useEffect(() => {
+        setClientSide(true);
+    }, []);
+
+    if (!isClientSide) {
+        return <aside>{children}</aside>;
+    }
     return (
         <SideBarPrimitive.Sidebar
             toggled={toggled}
@@ -33,7 +41,6 @@ function SideBar({ children, className, ...props }: RootProps) {
             className={cn('root', className)}
             {...props}
         >
-            {toggled}
             {children}
         </SideBarPrimitive.Sidebar>
     );
@@ -109,10 +116,12 @@ type SideBarItemProps = SideBarPrimitive.MenuItemProps & {
 };
 
 function SideBarItem({ children, className, ...props }: SideBarItemProps) {
+    const toogle = useSidebarStore((state) => state.toggle);
     return (
         <SideBarPrimitive.MenuItem
             {...props}
             className={`${className} text-sm font-medium`}
+            onClick={() => toogle()}
         >
             {children}
         </SideBarPrimitive.MenuItem>
