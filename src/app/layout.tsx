@@ -1,14 +1,7 @@
-import {
-    SideBar,
-    SideBarContent,
-    SideBarFooter,
-    SideBarHeader,
-    SideBarItem,
-    SidebarTrigger,
-} from '@/entities/side-bar/ui';
+import { SideBarPronta } from '@/entities/side-bar/ui/side-bar-pronta';
 import { poppins } from '@/shared/lib/fonts';
-import { IonIcon } from '@/shared/ui/ion-icon';
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -33,41 +26,13 @@ export default function RootLayout({
             <body
                 className={`${poppins.className} flex min-h-screen w-full flex-row bg-background`}
             >
-                <SideBar className="bg-primary-foreground">
-                    <SideBarHeader>
-                        <SidebarTrigger>
-                            <IonIcon name="menu-outline" size="large" />
-                        </SidebarTrigger>
-                    </SideBarHeader>
-                    <SideBarContent>
-                        <SideBarItem
-                            icon={
-                                <IonIcon name="library-outline" size="large" />
-                            }
-                            href="/projetos"
-                        >
-                            Projetos
-                        </SideBarItem>
-                        <SideBarItem
-                            icon={
-                                <IonIcon name="people-outline" size="large" />
-                            }
-                            href="/pesquisadores"
-                        >
-                            Pesquisadores
-                        </SideBarItem>
-                        <SideBarItem href="/projetos/2">Projeto 2</SideBarItem>
-                    </SideBarContent>
-                    <SideBarFooter>
-                        <h1 className="">Footer</h1>
-                    </SideBarFooter>
-                </SideBar>
-                <main className="w-full">{children}</main>
-                <script
+                <SideBarPronta />
+                {children}
+                <Script
                     type="module"
                     src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
                 />
-                <script src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" />
+                <Script src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" />
             </body>
         </html>
     );

@@ -1,78 +1,121 @@
 'use client';
 import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
+import * as SideBarPrimitive from 'react-pro-sidebar';
 import { useSidebarStore } from '../lib/sidebar-store';
+import './styles.scss';
 
-type RootProps = {
+type RootProps = SideBarPrimitive.SidebarProps & {
     children: ReactNode;
     className?: string;
 };
 
-function SideBar({ children, className }: RootProps) {
-    const [toggled, toggle] = useSidebarStore((state) => [
-        state.isToggled,
-        state.toggle,
-    ]);
+function SideBar({ children, className, ...props }: RootProps) {
+    const [toggled, collapsed, setToggled, setCollapsed] = useSidebarStore(
+        (state) => [
+            state.isToggled,
+            state.isCollapsed,
+            state.setToggled,
+            state.setCollapsed,
+        ],
+    );
     return (
-        <motion.aside
-            animate={{}}
-            className={cn(
-                `${toggled ? 'w-20 min-w-20' : 'w-64 min-w-64'}`,
-                className,
-            )}
+        <SideBarPrimitive.Sidebar
+            toggled={toggled}
+            collapsed={collapsed}
+            breakPoint="md"
+            onBreakPoint={() => {
+                setCollapsed(false);
+                setToggled(false);
+            }}
+            onBackdropClick={() => setToggled(false)}
+            className={cn('root', className)}
+            {...props}
         >
-            <div className="relative z-10 h-full overflow-y-auto overflow-x-hidden">
-                {children}
-            </div>
-        </motion.aside>
+            {toggled}
+            {children}
+        </SideBarPrimitive.Sidebar>
     );
 }
-function SideBarHeader({ children }: RootProps) {
-    return <div className="flex p-4">{children}</div>;
-}
 
-function SidebarTrigger({ children }: RootProps) {
+function SideBarHeader({ children }: { children: ReactNode }) {
+    return (
+        <div className="flex bg-gradient-to-br from-primary to-secondary p-4">
+            {children}
+        </div>
+    );
+}
+type NavBarTriggerProps = HTMLAttributes<HTMLDivElement> & {
+    children: ReactNode;
+    icon?: ReactNode;
+};
+function SidebarTrigger({ children, icon, ...props }: NavBarTriggerProps) {
+    const [collapse, collapsed] = useSidebarStore((state) => [
+        state.collapse,
+        state.isCollapsed,
+    ]);
+    return (
+        <div
+            className={`flex w-full items-center 
+            ${!collapsed ? 'justify-between' : 'justify-center'}`}
+            {...props}
+        >
+            {!collapsed && children}
+            <Button
+                onClick={() => collapse()}
+                variant={'link'}
+                className="hidden p-0 text-white md:block"
+            >
+                {icon}
+            </Button>
+        </div>
+    );
+}
+function SidebarOuterTrigger({
+    children,
+    ...props
+}: HTMLAttributes<HTMLButtonElement>) {
     const toggle = useSidebarStore((state) => state.toggle);
     return (
         <Button
             onClick={() => toggle()}
-            className="text-secondary"
+            className="trigger text-secondary"
             variant={'link'}
+            {...props}
         >
             {children}
         </Button>
     );
 }
-function SideBarContent({ children }: RootProps) {
+
+type ContentProps = SideBarPrimitive.MenuProps & {
+    children: ReactNode;
+};
+function SideBarContent({ children, ...props }: ContentProps) {
     return (
-        <nav className="p-4">
-            <ul>{children}</ul>
-        </nav>
+        <SideBarPrimitive.Menu className="content pt-4" {...props}>
+            {children}
+        </SideBarPrimitive.Menu>
     );
 }
 
 function SideBarFooter({ children }: RootProps) {
-    return <div>{children}</div>;
+    return <div className="footer">{children}</div>;
 }
 
-type SideBarItemProps = {
+type SideBarItemProps = SideBarPrimitive.MenuItemProps & {
     children: ReactNode;
-    href: string;
-    icon?: ReactNode;
 };
 
-function SideBarItem({ children, icon, href }: SideBarItemProps) {
-    const sidebarIsToggled = useSidebarStore((state) => state.isToggled);
+function SideBarItem({ children, className, ...props }: SideBarItemProps) {
     return (
-        <li className="text-base font-medium opacity-85">
-            <Link href={href} className="mx-5 my-4 flex items-center gap-2">
-                {icon}
-                {sidebarIsToggled ? null : children}
-            </Link>
-        </li>
+        <SideBarPrimitive.MenuItem
+            {...props}
+            className={`${className} text-sm font-medium`}
+        >
+            {children}
+        </SideBarPrimitive.MenuItem>
     );
 }
 
@@ -82,5 +125,6 @@ export {
     SideBarFooter,
     SideBarHeader,
     SideBarItem,
+    SidebarOuterTrigger,
     SidebarTrigger,
 };
