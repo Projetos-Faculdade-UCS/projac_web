@@ -1,8 +1,7 @@
 'use client';
-import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
 import dynamic from 'next/dynamic';
-import { HTMLAttributes, ReactNode, useEffect, useState } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import * as SideBarPrimitive from 'react-pro-sidebar';
 import { useSidebarStore } from '../lib/sidebar-store';
 import { SideBarSkeleton } from './sidebarSkeleton';
@@ -13,42 +12,7 @@ type RootProps = SideBarPrimitive.SidebarProps & {
     className?: string;
 };
 
-function SideBar({ children, className, ...props }: RootProps) {
-    const [isClientSide, setClientSide] = useState(false);
-    const [toggled, collapsed, setToggled, setCollapsed] = useSidebarStore(
-        (state) => [
-            state.isToggled,
-            state.isCollapsed,
-            state.setToggled,
-            state.setCollapsed,
-        ],
-    );
-    useEffect(() => {
-        setClientSide(true);
-    }, []);
-
-    if (!isClientSide) {
-        return <aside>{children}</aside>;
-    }
-    return (
-        <SideBarPrimitive.Sidebar
-            toggled={toggled}
-            collapsed={collapsed}
-            breakPoint="md"
-            onBreakPoint={() => {
-                setCollapsed(false);
-                setToggled(false);
-            }}
-            onBackdropClick={() => setToggled(false)}
-            className={cn('root', className)}
-            {...props}
-        >
-            {children}
-        </SideBarPrimitive.Sidebar>
-    );
-}
-
-const LazySideBar = dynamic(() => import('./side-bar-root'), {
+const SideBar = dynamic(() => import('./side-bar-root'), {
     ssr: false,
     loading: () => <SideBarSkeleton />,
 });
@@ -136,7 +100,6 @@ function SideBarItem({ children, className, ...props }: SideBarItemProps) {
 }
 
 export {
-    LazySideBar,
     SideBar,
     SideBarContent,
     SideBarFooter,
