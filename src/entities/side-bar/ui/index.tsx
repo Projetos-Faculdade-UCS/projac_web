@@ -1,9 +1,11 @@
 'use client';
 import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
+import dynamic from 'next/dynamic';
 import { HTMLAttributes, ReactNode, useEffect, useState } from 'react';
 import * as SideBarPrimitive from 'react-pro-sidebar';
 import { useSidebarStore } from '../lib/sidebar-store';
+import { SideBarSkeleton } from './sidebarSkeleton';
 import './styles.scss';
 
 type RootProps = SideBarPrimitive.SidebarProps & {
@@ -45,6 +47,11 @@ function SideBar({ children, className, ...props }: RootProps) {
         </SideBarPrimitive.Sidebar>
     );
 }
+
+const LazySideBar = dynamic(() => import('./side-bar-root'), {
+    ssr: false,
+    loading: () => <SideBarSkeleton />,
+});
 
 function SideBarHeader({ children }: { children: ReactNode }) {
     return (
@@ -129,6 +136,7 @@ function SideBarItem({ children, className, ...props }: SideBarItemProps) {
 }
 
 export {
+    LazySideBar,
     SideBar,
     SideBarContent,
     SideBarFooter,

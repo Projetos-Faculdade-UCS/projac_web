@@ -1,6 +1,6 @@
 'use client';
 import {
-    SideBar,
+    LazySideBar,
     SideBarContent,
     SideBarFooter,
     SideBarHeader,
@@ -15,7 +15,7 @@ export function SideBarPronta() {
     const path = usePathname();
 
     return (
-        <SideBar transitionDuration={600}>
+        <LazySideBar transitionDuration={600}>
             <SideBarHeader>
                 <SidebarTrigger
                     icon={<IonIcon name="menu-outline" size="large" />}
@@ -60,6 +60,6 @@ export function SideBarPronta() {
             <SideBarFooter>
                 <h1 className="">Footer</h1>
             </SideBarFooter>
-        </SideBar>
+        </LazySideBar>
     );
 }
