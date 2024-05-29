@@ -9,7 +9,7 @@ export default function ProjetoDetalhe({
     };
 }) {
     return (
-        <main className="w-full bg-background text-foreground">
+        <main className="flex w-full flex-col bg-background px-2 py-2 text-foreground md:px-10">
             <div className="flex items-center">
                 <SidebarOuterTrigger className="md:hidden">
                     <IonIcon name="menu-outline" size="large" />

@@ -5,6 +5,16 @@ type IonIconProps = {
 };
 
 export function IonIcon({ name, size, className }: IonIconProps) {
-    // @ts-ignore
-    return <ion-icon name={name} size={size} className={className}></ion-icon>;
+    const IonIcon = 'ion-icon';
+    return (
+        // @ts-ignore
+        <IonIcon
+            name={name}
+            size={size}
+            className={className}
+            style={{
+                padding: '0.3125rem',
+            }}
+        />
+    );
 }
