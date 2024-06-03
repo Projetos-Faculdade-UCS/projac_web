@@ -3,7 +3,7 @@ type Projeto = {
     titulo: string;
     objetivo: string;
     descricao: string;
-    status: string;
+    status: 'EM_ANDAMENTO' | 'CANCELADO' | 'CONCLUIDO';
     dataCriacao: string;
     dataConclusao: string | null;
     valorSolicitado: number;
@@ -33,6 +33,7 @@ type ValorArrecadado = {
 }
 
 type Subarea = {
+    id: number;
     nome: string;
     color: string;
 }
