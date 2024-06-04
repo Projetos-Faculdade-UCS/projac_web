@@ -1,6 +1,6 @@
 import { SidebarOuterTrigger } from '@/entities/side-bar/ui';
 import { SubAreaGrid } from '@/entities/sub-area-grid/ui';
-import { getProjeto } from '@/shared/api/projeto';
+import { ProjetosApiManager } from '@/shared/api/projetos-api-manager';
 import { IonIcon } from '@/shared/ui/ion-icon';
 import { Suspense } from 'react';
 
@@ -11,7 +11,7 @@ export default function ProjetoDetalhe({
         id: string;
     };
 }) {
-    const data = getProjeto(params.id);
+    const data = ProjetosApiManager.getInstance().getProjeto(params.id);
     return (
         <main className="flex w-full flex-col bg-background px-2 py-2 text-foreground md:px-10">
             <div className="flex items-center">
