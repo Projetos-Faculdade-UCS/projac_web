@@ -1,9 +1,10 @@
 'use client';
-import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
+import dynamic from 'next/dynamic';
 import { HTMLAttributes, ReactNode } from 'react';
 import * as SideBarPrimitive from 'react-pro-sidebar';
 import { useSidebarStore } from '../lib/sidebar-store';
+import { SideBarSkeleton } from './sidebarSkeleton';
 import './styles.scss';
 
 type RootProps = SideBarPrimitive.SidebarProps & {
@@ -11,33 +12,10 @@ type RootProps = SideBarPrimitive.SidebarProps & {
     className?: string;
 };
 
-function SideBar({ children, className, ...props }: RootProps) {
-    const [toggled, collapsed, setToggled, setCollapsed] = useSidebarStore(
-        (state) => [
-            state.isToggled,
-            state.isCollapsed,
-            state.setToggled,
-            state.setCollapsed,
-        ],
-    );
-    return (
-        <SideBarPrimitive.Sidebar
-            toggled={toggled}
-            collapsed={collapsed}
-            breakPoint="md"
-            onBreakPoint={() => {
-                setCollapsed(false);
-                setToggled(false);
-            }}
-            onBackdropClick={() => setToggled(false)}
-            className={cn('root', className)}
-            {...props}
-        >
-            {toggled}
-            {children}
-        </SideBarPrimitive.Sidebar>
-    );
-}
+const SideBar = dynamic(() => import('./side-bar-root'), {
+    ssr: false,
+    loading: () => <SideBarSkeleton />,
+});
 
 function SideBarHeader({ children }: { children: ReactNode }) {
     return (
@@ -109,10 +87,12 @@ type SideBarItemProps = SideBarPrimitive.MenuItemProps & {
 };
 
 function SideBarItem({ children, className, ...props }: SideBarItemProps) {
+    const toogle = useSidebarStore((state) => state.toggle);
     return (
         <SideBarPrimitive.MenuItem
             {...props}
             className={`${className} text-sm font-medium`}
+            onClick={() => toogle()}
         >
             {children}
         </SideBarPrimitive.MenuItem>

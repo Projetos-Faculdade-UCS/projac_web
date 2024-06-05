@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     env: {
-        API_URL: process.env.API_URL,
+        apiUrl: process.env.API_URL,
+        apiKey: process.env.API_KEY,
     }
 };
 

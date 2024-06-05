@@ -1,10 +1,16 @@
+import { CSSProperties } from 'react';
+
 type IonIconProps = {
     name: string;
     size?: 'small' | 'large';
     className?: string;
+    style?: CSSProperties;
 };
 
-export function IonIcon({ name, size, className }: IonIconProps) {
-    // @ts-ignore
-    return <ion-icon name={name} size={size} className={className}></ion-icon>;
+export function IonIcon({ name, size, className, style }: IonIconProps) {
+    const IonIcon = 'ion-icon';
+    return (
+        // @ts-ignore
+        <IonIcon name={name} size={size} class={className} style={style} />
+    );
 }

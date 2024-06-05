@@ -1,13 +1,8 @@
 import { SideBarPronta } from '@/entities/side-bar/ui/side-bar-pronta';
 import { poppins } from '@/shared/lib/fonts';
-import type { Metadata } from 'next';
+import { Metadata } from 'next';
 import Script from 'next/script';
 import './globals.css';
-
-export const metadata: Metadata = {
-    title: 'Projac',
-    description: 'Sistema de projetos acadêmicos',
-};
 
 export default function RootLayout({
     children,
@@ -24,7 +19,7 @@ export default function RootLayout({
                 />
             </head>
             <body
-                className={`${poppins.className} flex min-h-screen w-full flex-row bg-background`}
+                className={`${poppins.className} flex h-screen w-full flex-row bg-background`}
             >
                 <SideBarPronta />
                 {children}
@@ -37,3 +32,8 @@ export default function RootLayout({
         </html>
     );
 }
+
+export const metadata: Metadata = {
+    title: 'Projac',
+    description: 'Sistema de projetos acadêmicos',
+};
