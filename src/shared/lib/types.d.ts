@@ -49,18 +49,20 @@ type AgenciaFomento = {
     sigla: string;
 }
 
-// type ProjetoList = {
-//     id: number;
-//     titulo: string;
-//     objetivo: string;
-//     dataCriacao: string;
-//     descricao: string;
-//     valorSolicitado: number;
-//     dataConclusao: string | null;
-//     status: string;
-//     valorTotalArrecadado: number;
-//     area: {
-//         nome: string;
-//         color: string;
-//     };
-// }
+type ProjetoResumido = {
+    id: number;
+    titulo: string;
+    objetivo: string;
+    dataCriacao: string;
+    status: Projeto['status'];
+    area: {
+        nome: string;
+        color: string;
+    };
+    coordenador: {
+        id: number;
+        nome: string;
+        sobrenome: string;
+    };
+
+}

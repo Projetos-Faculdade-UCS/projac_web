@@ -7,37 +7,41 @@ import {
 } from '@/shared/ui/card';
 import { IonIcon } from '@/shared/ui/ion-icon';
 import Link from 'next/link';
-import { getResponsavel } from '../lib';
+import './paper-flip.scss';
 
 type ProjetoCardProps = {
-    projeto: Projeto;
+    projeto: ProjetoResumido;
 };
 
 export function ProjetoCard({ projeto }: ProjetoCardProps) {
     return (
         <Link href={`/projetos/${projeto.id}`}>
             <Card
-                className="cursor-pointer rounded-sm border-0 border-l-4 shadow-md transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg"
+                className="cursor-pointer overflow-hidden rounded-sm border-0 border-l-4 shadow-md transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg"
                 style={{
                     borderColor: projeto.area.color,
                 }}
             >
                 <CardHeader className="relative">
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-start">
                         <CardTitle className="text-xl">
                             {projeto.titulo}
                         </CardTitle>
-                        <span className="text-xs text-muted">
-                            {projeto.dataCriacao}
-                        </span>
                     </div>
-                    <CardDescription className="h-10 overflow-hidden text-ellipsis">
+                    <CardDescription className="objetivoTruncado">
                         {projeto.objetivo}
                     </CardDescription>
-                    <div className="absolute right-0 top-0 h-10 w-10  overflow-hidden">
-                        <div className="relative h-full w-full">
-                            <div className="absolute right-0 top-0 h-10 w-10 bg-primary" />
-                        </div>
+                    {/* paper flip effect done very wrong */}
+                    <div className="absolute right-0 top-0 flex h-14 w-14 items-start justify-end pr-2 pt-2">
+                        <div
+                            className="paper-flip border-l-[3.5rem] border-t-[3.5rem]"
+                            data-status={projeto.status}
+                        ></div>
+                        <IonIcon
+                            name="close-outline"
+                            size="small"
+                            className="text-white"
+                        />
                     </div>
                 </CardHeader>
                 <CardContent>
@@ -57,8 +61,13 @@ export function ProjetoCard({ projeto }: ProjetoCardProps) {
                     <div className="flex items-center gap-2 text-muted">
                         <IonIcon name="person-outline" size="small" />
                         <span className="text-sm">
-                            {getResponsavel(projeto.pesquisadores)?.nome}
+                            {projeto.coordenador.nome}{' '}
+                            {projeto.coordenador.sobrenome}
                         </span>
+                    </div>
+                    <div className="flex items-center gap-2 text-muted">
+                        <IonIcon name="calendar-outline" size="small" />
+                        <span className="text-sm">{projeto.dataCriacao}</span>
                     </div>
                 </CardContent>
             </Card>
