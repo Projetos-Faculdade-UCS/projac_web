@@ -3,7 +3,7 @@ type Projeto = {
     titulo: string;
     objetivo: string;
     descricao: string;
-    status: string;
+    status: 'EM_ANDAMENTO' | 'CANCELADO' | 'CONCLUIDO';
     dataCriacao: string;
     dataConclusao: string | null;
     valorSolicitado: number;
@@ -33,6 +33,7 @@ type ValorArrecadado = {
 }
 
 type Subarea = {
+    id: number;
     nome: string;
     color: string;
 }
@@ -48,18 +49,20 @@ type AgenciaFomento = {
     sigla: string;
 }
 
-// type ProjetoList = {
-//     id: number;
-//     titulo: string;
-//     objetivo: string;
-//     dataCriacao: string;
-//     descricao: string;
-//     valorSolicitado: number;
-//     dataConclusao: string | null;
-//     status: string;
-//     valorTotalArrecadado: number;
-//     area: {
-//         nome: string;
-//         color: string;
-//     };
-// }
+type ProjetoResumido = {
+    id: number;
+    titulo: string;
+    objetivo: string;
+    dataCriacao: string;
+    status: Projeto['status'];
+    area: {
+        nome: string;
+        color: string;
+    };
+    coordenador: {
+        id: number;
+        nome: string;
+        sobrenome: string;
+    };
+
+}

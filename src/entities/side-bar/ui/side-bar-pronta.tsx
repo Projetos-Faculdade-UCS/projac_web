@@ -30,31 +30,43 @@ export function SideBarPronta() {
             </SideBarHeader>
             <SideBarContent>
                 <SideBarItem
-                    icon={<IonIcon name="home-outline" size="large" />}
+                    icon={
+                        <IonIcon
+                            name="home-outline"
+                            size="large"
+                            className="p-[0.3125rem]"
+                        />
+                    }
                     component={<Link href="/" />}
                     active={path === '/'}
                 >
                     Início
                 </SideBarItem>
                 <SideBarItem
-                    icon={<IonIcon name="library-outline" size="large" />}
+                    icon={
+                        <IonIcon
+                            name="library-outline"
+                            size="large"
+                            className="p-[0.3125rem]"
+                        />
+                    }
                     component={<Link href="/projetos" />}
                     active={path === '/projetos'}
                 >
                     Projetos
                 </SideBarItem>
                 <SideBarItem
-                    icon={<IonIcon name="people-outline" size="large" />}
+                    icon={
+                        <IonIcon
+                            name="people-outline"
+                            size="large"
+                            className="p-[0.3125rem]"
+                        />
+                    }
                     component={<Link href="/pesquisadores" />}
                     active={path === '/pesquisadores'}
                 >
                     Pesquisadores
-                </SideBarItem>
-                <SideBarItem
-                    component={<Link href="/projetos/2" />}
-                    active={path === '/projetos/1'}
-                >
-                    Projeto 2
                 </SideBarItem>
             </SideBarContent>
             <SideBarFooter>

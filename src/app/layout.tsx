@@ -19,7 +19,7 @@ export default function RootLayout({
                 />
             </head>
             <body
-                className={`${poppins.className} flex min-h-screen w-full flex-row bg-background`}
+                className={`${poppins.className} flex h-screen w-full flex-row bg-background`}
             >
                 <SideBarPronta />
                 {children}
