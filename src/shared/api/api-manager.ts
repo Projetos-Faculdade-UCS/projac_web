@@ -1,16 +1,25 @@
 import nextConfig from "@/next.config";
-import axios, { AxiosInstance } from "axios";
+import axios from "axios";
+import { AxiosCacheInstance, setupCache } from 'axios-cache-interceptor/dev';
+import { customFileStorage } from "./fs-cache-store";
+
+const ONE_MINUTE = 1000 * 60;
+const CACHE_TIME = ONE_MINUTE * 15;
 
 /**
  * Singleton class to manage the API instance
  */
 export abstract class BaseApiManager {
-    private api: AxiosInstance;
+    private api: AxiosCacheInstance;
     private apiUrl = nextConfig?.env?.apiUrl;
     private apiKey = nextConfig?.env?.apiKey;
 
     protected constructor() {
-        this.api = axios.create({
+        if (!this.apiUrl || !this.apiKey) {
+            throw new Error("API URL or API Key is not defined in the next.config environment variables.");
+        }
+
+        const instance = axios.create({
             baseURL: this.apiUrl,
             headers: {
                 'Content-Type': 'application/json',
@@ -18,9 +27,19 @@ export abstract class BaseApiManager {
             },
             timeout: 10000,
         });
+
+        this.api = setupCache(instance, {
+            storage: customFileStorage,
+            methods: ['get'], // Methods to cache
+            debug: console.log, // Enable logging
+            headerInterpreter: (headers) => {
+                return CACHE_TIME;
+            }
+
+        });
     }
 
-    protected getApi(): AxiosInstance {
+    protected getApi(): AxiosCacheInstance {
         return this.api;
     }
 }

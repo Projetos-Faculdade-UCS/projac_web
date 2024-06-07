@@ -12,8 +12,8 @@ export async function SubAreaGrid({ promiseProj }: SubAreaGridProps) {
                     key={`${subarea.id}`}
                     className={`rounded-md border border-solid px-2 py-1 text-xs`}
                     style={{
-                        borderColor: subarea.color,
-                        color: subarea.color,
+                        borderColor: subarea.cor,
+                        color: subarea.cor,
                     }}
                 >
                     {subarea.nome}

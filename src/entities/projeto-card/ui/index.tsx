@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { Button } from '@/shared/ui/button';
 import {
     Card,
@@ -20,9 +21,9 @@ export function ProjetoCard({ projeto }: ProjetoCardProps) {
     return (
         <Link href={`/projetos/${projeto.id}`}>
             <Card
-                className="overflow-hidden rounded-sm border-0 border-l-4 shadow-md transition-transform duration-200 hover:shadow-lg"
+                className="overflow-hidden rounded-md border-0 border-l-4 shadow-md transition-transform duration-200 hover:shadow-lg"
                 style={{
-                    borderColor: projeto.area.color,
+                    borderColor: projeto.area.cor,
                 }}
             >
                 <CardHeader className="relative">
@@ -53,11 +54,12 @@ export function ProjetoCard({ projeto }: ProjetoCardProps) {
                 <CardContent>
                     <div className="flex items-center gap-3 text-muted">
                         <div className="flex items-center gap-2 truncate">
-                            <IonIcon
-                                name="person-outline"
-                                size="small"
-                                className="shrink-0"
-                            />
+                            <Avatar>
+                                <AvatarImage
+                                    src={projeto.coordenador.fotoPerfil}
+                                />
+                                <AvatarFallback>CN</AvatarFallback>
+                            </Avatar>
                             <span className="truncate text-sm">
                                 {projeto.coordenador.nome}{' '}
                                 {projeto.coordenador.sobrenome}
@@ -71,9 +73,9 @@ export function ProjetoCard({ projeto }: ProjetoCardProps) {
                 </CardContent>
                 <CardFooter className="relative">
                     <div
-                        className="absolute bottom-2 left-0 flex items-center gap-2 rounded-r-md px-2 py-[.125rem] shadow-md"
+                        className="absolute bottom-2 left-0 flex items-center gap-2 rounded-r-sm px-2 py-[.125rem] shadow-md"
                         style={{
-                            backgroundColor: projeto.area.color,
+                            backgroundColor: projeto.area.cor,
                         }}
                     >
                         <span className="text-xs text-white">

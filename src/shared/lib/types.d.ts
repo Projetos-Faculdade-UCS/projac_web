@@ -10,7 +10,7 @@ type Projeto = {
     valorTotalArrecadado: number;
     area: {
         nome: string;
-        color: string;
+        cor: string;
     };
     producoesAcademicas: ProducaoAcademica[];
     valoresArrecadados: ValorArrecadado[];
@@ -35,13 +35,14 @@ type ValorArrecadado = {
 type Subarea = {
     id: number;
     nome: string;
-    color: string;
+    cor: string;
 }
 
 type Pesquisador = {
     nome: string;
     cargo: string;
     horas: number;
+    fotoPerfil: string;
 }
 
 type AgenciaFomento = {
@@ -57,12 +58,13 @@ type ProjetoResumido = {
     status: Projeto['status'];
     area: {
         nome: string;
-        color: string;
+        cor: string;
     };
     coordenador: {
         id: number;
         nome: string;
         sobrenome: string;
+        fotoPerfil: string;
     };
 
 }
