@@ -14,7 +14,7 @@ const nextConfig = {
     },
     experimental : {
         outputFileTracingIncludes: {
-            '/': ['./cache/*'],
+            '/api': ['./cache/**'],
         }
     }
 };

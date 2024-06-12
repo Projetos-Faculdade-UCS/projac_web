@@ -1,10 +1,16 @@
 import { CacheRequestConfig, NotEmptyStorageValue, StorageValue, buildStorage } from 'axios-cache-interceptor';
 import FileSystemCache from 'file-system-cache';
+import fs from 'fs';
 import path from 'path';
+
+const cacheDir =  path.join('/tmp', '.cache');
+if (!fs.existsSync(cacheDir)) {
+    fs.mkdirSync(cacheDir, { recursive: true });
+}
 
 // Create a `file-system-cache` instance
 const cache = FileSystemCache({
-    basePath: path.join(process.cwd(), '.cache'), // Path to store cache files
+    basePath: cacheDir, // Path to store cache files
     ns: 'http-cache' // Namespace to avoid potential conflicts
 });
 
