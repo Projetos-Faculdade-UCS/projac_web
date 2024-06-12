@@ -50,7 +50,7 @@ export function SideBarPronta() {
                 <SideBarItem
                     icon={
                         <IonIcon
-                            name="reader-outline"
+                            name="folder-open-outline"
                             size="large"
                             className="p-[0.3125rem]"
                         />

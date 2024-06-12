@@ -13,7 +13,7 @@ export abstract class BaseApiManager {
     private api: AxiosCacheInstance;
     private apiUrl = nextConfig?.env?.apiUrl;
     private apiKey = nextConfig?.env?.apiKey;
-    private cacheTime = (nextConfig?.env?.cacheTime as number | undefined) || CACHE_TIME;
+    private cacheTime = nextConfig?.env?.cacheTime === undefined ? CACHE_TIME : Number(nextConfig.env.cacheTime);
 
     protected constructor() {
         if (!this.apiUrl || !this.apiKey) {
