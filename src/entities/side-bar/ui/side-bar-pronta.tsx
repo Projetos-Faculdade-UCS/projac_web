@@ -8,6 +8,7 @@ import {
     SidebarTrigger,
 } from '@/entities/side-bar/ui';
 import { IonIcon } from '@/shared/ui/ion-icon';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -22,8 +23,14 @@ export function SideBarPronta() {
                 >
                     <Link
                         href={'/'}
-                        className="text-xl font-semibold text-white"
+                        className="flex items-center gap-2 text-xl font-semibold text-white"
                     >
+                        <Image
+                            src="/projac-branco.png"
+                            alt="Logo"
+                            width={35}
+                            height={35}
+                        />
                         Projac
                     </Link>
                 </SidebarTrigger>
@@ -45,7 +52,7 @@ export function SideBarPronta() {
                 <SideBarItem
                     icon={
                         <IonIcon
-                            name="library-outline"
+                            name="reader-outline"
                             size="large"
                             className="p-[0.3125rem]"
                         />
@@ -54,6 +61,20 @@ export function SideBarPronta() {
                     active={path === '/projetos'}
                 >
                     Projetos
+                </SideBarItem>
+                <SideBarItem
+                    className="text-xs"
+                    icon={
+                        <IonIcon
+                            name="library-outline"
+                            size="large"
+                            className="p-[0.3125rem]"
+                        />
+                    }
+                    component={<Link href="/producoes-academicas" />}
+                    active={path === '/producoes-academicas'}
+                >
+                    Produções Acadêmicas
                 </SideBarItem>
                 <SideBarItem
                     icon={
