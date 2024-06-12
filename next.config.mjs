@@ -3,6 +3,7 @@ const nextConfig = {
     env: {
         apiUrl: process.env.API_URL,
         apiKey: process.env.API_KEY,
+        cacheTime: process.env.CACHE_TIME,
     },
     images: {
         remotePatterns: [
@@ -12,11 +13,6 @@ const nextConfig = {
             },
         ]
     },
-    experimental : {
-        outputFileTracingIncludes: {
-            '/api': ['./cache/**'],
-        }
-    }
 };
 
 export default nextConfig;
