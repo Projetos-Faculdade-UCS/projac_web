@@ -7,8 +7,8 @@ import {
     SideBarItem,
     SidebarTrigger,
 } from '@/entities/side-bar/ui';
+import { ProjacIcon } from '@/shared/ui/icons/projac';
 import { IonIcon } from '@/shared/ui/ion-icon';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -21,17 +21,15 @@ export function SideBarPronta() {
                 <SidebarTrigger
                     icon={<IonIcon name="menu-outline" size="large" />}
                 >
-                    <Link
-                        href={'/'}
-                        className="flex items-center gap-2 text-xl font-semibold text-white"
-                    >
-                        <Image
-                            src="/projac-branco.png"
-                            alt="Logo"
+                    <Link href={'/'} className="flex items-center gap-2">
+                        <ProjacIcon
+                            className="fill-white"
                             width={35}
                             height={35}
                         />
-                        Projac
+                        <span className="text-xl font-semibold text-white">
+                            Projac
+                        </span>
                     </Link>
                 </SidebarTrigger>
             </SideBarHeader>

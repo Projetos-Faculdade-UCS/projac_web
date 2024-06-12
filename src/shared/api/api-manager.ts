@@ -13,6 +13,7 @@ export abstract class BaseApiManager {
     private api: AxiosCacheInstance;
     private apiUrl = nextConfig?.env?.apiUrl;
     private apiKey = nextConfig?.env?.apiKey;
+    private cacheTime = (nextConfig?.env?.cacheTime as number | undefined) || CACHE_TIME;
 
     protected constructor() {
         if (!this.apiUrl || !this.apiKey) {
@@ -31,8 +32,8 @@ export abstract class BaseApiManager {
         this.api = setupCache(instance, {
             storage: customFileStorage,
             methods: ['get'],
-            headerInterpreter: (headers) => {
-                return CACHE_TIME;
+            headerInterpreter: () => {
+                return this.cacheTime;
             }
         
         });
