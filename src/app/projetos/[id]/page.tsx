@@ -1,7 +1,9 @@
+import { InfosGerais } from '@/entities/detalhe-projeto/ui/infos-gerais';
+import { Titulo } from '@/entities/detalhe-projeto/ui/titulo';
 import { SidebarOuterTrigger } from '@/entities/side-bar/ui';
-import { SubAreaGrid } from '@/entities/sub-area-grid/ui';
 import { ProjetosApiManager } from '@/shared/api/projetos-api-manager';
 import { IonIcon } from '@/shared/ui/ion-icon';
+import { Skeleton } from '@/shared/ui/skeleton';
 import { Suspense } from 'react';
 
 export default function ProjetoDetalhe({
@@ -14,15 +16,17 @@ export default function ProjetoDetalhe({
     const data = ProjetosApiManager.getInstance().getProjeto(params.id);
     return (
         <main className="flex w-full flex-col bg-background px-2 py-2 text-foreground md:px-10">
-            <div className="flex items-center">
-                <SidebarOuterTrigger className="md:hidden">
+            <div className="mb-4 flex items-center">
+                <SidebarOuterTrigger className="pl-0 md:hidden">
                     <IonIcon name="menu-outline" size="large" />
                 </SidebarOuterTrigger>
-                <h1 className="text-primary">Projeto {params.id}</h1>
-                <Suspense fallback={<div>Carregando...</div>}>
-                    <SubAreaGrid promiseProj={data} />
+                <Suspense fallback={<Skeleton className="mb-2 h-4 w-56" />}>
+                    <Titulo promiseProj={data} />
                 </Suspense>
             </div>
+            <Suspense fallback={<div>Carregando...</div>}>
+                <InfosGerais promiseProj={data} />
+            </Suspense>
         </main>
     );
 }

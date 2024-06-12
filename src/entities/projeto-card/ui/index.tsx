@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
-import { Button } from '@/shared/ui/button';
+import { ProjetoResumido } from '@/shared/lib/types';
+import { Avatar, AvatarImage } from '@/shared/ui/avatar';
 import {
     Card,
     CardContent,
@@ -10,7 +10,8 @@ import {
 } from '@/shared/ui/card';
 import { IonIcon } from '@/shared/ui/ion-icon';
 import Link from 'next/link';
-import { formatDateToTimeAgo, getIconName } from '../lib';
+import { formatDateToTimeAgo, getIconName, getStatusHexColor } from '../lib';
+import { CardMenu } from './card-menu';
 import './paper-flip.scss';
 
 type ProjetoCardProps = {
@@ -21,35 +22,33 @@ export function ProjetoCard({ projeto }: ProjetoCardProps) {
     return (
         <Link href={`/projetos/${projeto.id}`}>
             <Card
-                className="overflow-hidden rounded-md border-0 border-l-4 shadow-md transition-transform duration-200 hover:shadow-lg"
+                className="overflow-hidden rounded-md border-0 border-l-4 bg-primary-foreground shadow-md transition-transform duration-200 hover:shadow-lg"
                 style={{
                     borderColor: projeto.area.cor,
                 }}
             >
                 <CardHeader className="relative">
-                    <div className="flex items-center justify-between">
-                        <CardTitle className="text-xl">
-                            {projeto.titulo}
-                        </CardTitle>
-                        <Button variant={'link'}>
-                            <IonIcon name="ellipsis-vertical" size="small" />
-                        </Button>
+                    <CardTitle className="text-xl">{projeto.titulo}</CardTitle>
+                    <div className="absolute right-0 top-0 flex items-start justify-end pr-2 pt-2">
+                        <div
+                            className="paper-flip border-l-[3.5rem] border-t-[3.5rem] opacity-20"
+                            style={{
+                                borderTopColor: getStatusHexColor(
+                                    projeto.status,
+                                ),
+                            }}
+                        />
+                        <IonIcon
+                            name={getIconName(projeto.status)}
+                            size="small"
+                            style={{
+                                color: getStatusHexColor(projeto.status),
+                            }}
+                        />
                     </div>
                     <CardDescription className="objetivoTruncado">
                         {projeto.objetivo}
                     </CardDescription>
-                    {/* paper flip effect done very wrong */}
-                    <div className="absolute right-0 top-0 flex items-start justify-end pr-2 pt-2">
-                        <div
-                            className="paper-flip border-l-[3.5rem] border-t-[3.5rem]"
-                            data-status={projeto.status}
-                        ></div>
-                        <IonIcon
-                            name={getIconName(projeto.status)}
-                            size="small"
-                            className="text-white"
-                        />
-                    </div>
                 </CardHeader>
                 <CardContent>
                     <div className="flex items-center gap-3 text-muted">
@@ -57,8 +56,10 @@ export function ProjetoCard({ projeto }: ProjetoCardProps) {
                             <Avatar>
                                 <AvatarImage
                                     src={projeto.coordenador.fotoPerfil}
+                                    alt={`Foto do coordenador ${projeto.coordenador.nome}`}
+                                    width={100}
+                                    height={100}
                                 />
-                                <AvatarFallback>CN</AvatarFallback>
                             </Avatar>
                             <span className="truncate text-sm">
                                 {projeto.coordenador.nome}{' '}
@@ -82,6 +83,7 @@ export function ProjetoCard({ projeto }: ProjetoCardProps) {
                             {projeto.area.nome}
                         </span>
                     </div>
+                    <CardMenu />
                 </CardFooter>
             </Card>
         </Link>

@@ -1,3 +1,4 @@
+import { Projeto } from '@/shared/lib/types';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
@@ -22,6 +23,19 @@ export function getIconName(status: Projeto['status']) {
             return 'close';
         case 'CONCLUIDO':
             return 'checkmark-done-sharp';
+        default:
+            return '';
+    }
+}
+
+export function getStatusHexColor(status: Projeto['status']) {
+    switch (status) {
+        case 'EM_ANDAMENTO':
+            return '#FF9800';
+        case 'CANCELADO':
+            return '#F44336';
+        case 'CONCLUIDO':
+            return '#3d8d40';
         default:
             return '';
     }

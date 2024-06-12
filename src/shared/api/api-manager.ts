@@ -1,6 +1,6 @@
 import nextConfig from "@/next.config";
 import axios from "axios";
-import { AxiosCacheInstance, setupCache } from 'axios-cache-interceptor/dev';
+import { AxiosCacheInstance, setupCache } from 'axios-cache-interceptor';
 import { customFileStorage } from "./fs-cache-store";
 
 const ONE_MINUTE = 1000 * 60;
@@ -30,8 +30,7 @@ export abstract class BaseApiManager {
 
         this.api = setupCache(instance, {
             storage: customFileStorage,
-            methods: ['get'], // Methods to cache
-            debug: console.log, // Enable logging
+            methods: ['get'],
             headerInterpreter: (headers) => {
                 return CACHE_TIME;
             }
