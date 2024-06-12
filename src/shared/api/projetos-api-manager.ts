@@ -17,7 +17,6 @@ export class ProjetosApiManager extends BaseApiManager {
     public async getProjetos() {
         const api = this.getApi();
         const response = await api.get<ProjetoResumido[]>(`/projetos`);
-
         return response.data;
     }
 

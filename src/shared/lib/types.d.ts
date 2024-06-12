@@ -1,4 +1,4 @@
-type Projeto = {
+export type Projeto = {
     id: number;
     titulo: string;
     objetivo: string;
@@ -10,7 +10,7 @@ type Projeto = {
     valorTotalArrecadado: number;
     area: {
         nome: string;
-        color: string;
+        cor: string;
     };
     producoesAcademicas: ProducaoAcademica[];
     valoresArrecadados: ValorArrecadado[];
@@ -19,37 +19,38 @@ type Projeto = {
     agenciasFomento: AgenciaFomento[];
 }
 
-type ProducaoAcademica = {
+export type ProducaoAcademica = {
     id: number;
     titulo: string;
     tipo: string;
     descricao: string;
 }
 
-type ValorArrecadado = {
+export type ValorArrecadado = {
     id: number;
     valor: number;
     data: string;
 }
 
-type Subarea = {
+export type Subarea = {
     id: number;
     nome: string;
-    color: string;
+    cor: string;
 }
 
-type Pesquisador = {
+export type Pesquisador = {
     nome: string;
     cargo: string;
     horas: number;
+    fotoPerfil: string;
 }
 
-type AgenciaFomento = {
+export type AgenciaFomento = {
     nome: string;
     sigla: string;
 }
 
-type ProjetoResumido = {
+export type ProjetoResumido = {
     id: number;
     titulo: string;
     objetivo: string;
@@ -57,12 +58,13 @@ type ProjetoResumido = {
     status: Projeto['status'];
     area: {
         nome: string;
-        color: string;
+        cor: string;
     };
     coordenador: {
         id: number;
         nome: string;
         sobrenome: string;
+        fotoPerfil: string;
     };
 
 }

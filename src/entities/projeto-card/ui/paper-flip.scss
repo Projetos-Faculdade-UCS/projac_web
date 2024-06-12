@@ -5,31 +5,12 @@
     right: 0;
     width: 0;
     height: 0;
-    border-top-color: var(--primary);
     border-left-color: transparent;
 
-    filter: drop-shadow(.0625rem .0625rem .25rem rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(.125rem .125rem .5rem rgba(0, 0, 0, 0.75));
     display: flex;
     align-items: center;
     justify-content: center;
-
-
-    &[data-status="EM_ANDAMENTO"]{
-        border-top-color:#FF9800;
-    }
-    &[data-status="CONCLUIDO"]{
-        border-top-color:#4CAF50;
-    }
-    &[data-status="CANCELADO"]{
-        border-top-color:#F44336;
-    }
-    &[data-inner="true"] {
-        top: 0.25rem;
-        right: 0.25rem;
-        border-top-color: white;
-        border-radius: 0.25rem;
-        filter: none;
-    }
 }
 
 

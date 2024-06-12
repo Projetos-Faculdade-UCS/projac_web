@@ -1,12 +1,17 @@
+import { ProjetoResumido } from '@/shared/lib/types';
+import { Avatar, AvatarImage } from '@/shared/ui/avatar';
 import {
     Card,
     CardContent,
     CardDescription,
+    CardFooter,
     CardHeader,
     CardTitle,
 } from '@/shared/ui/card';
 import { IonIcon } from '@/shared/ui/ion-icon';
 import Link from 'next/link';
+import { formatDateToTimeAgo, getIconName, getStatusHexColor } from '../lib';
+import { CardMenu } from './card-menu';
 import './paper-flip.scss';
 
 type ProjetoCardProps = {
@@ -17,59 +22,69 @@ export function ProjetoCard({ projeto }: ProjetoCardProps) {
     return (
         <Link href={`/projetos/${projeto.id}`}>
             <Card
-                className="cursor-pointer overflow-hidden rounded-sm border-0 border-l-4 shadow-md transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg"
+                className="overflow-hidden rounded-md border-0 border-l-4 bg-primary-foreground shadow-md transition-transform duration-200 hover:shadow-lg"
                 style={{
-                    borderColor: projeto.area.color,
+                    borderColor: projeto.area.cor,
                 }}
             >
                 <CardHeader className="relative">
-                    <div className="flex items-center justify-start">
-                        <CardTitle className="text-xl">
-                            {projeto.titulo}
-                        </CardTitle>
+                    <CardTitle className="text-xl">{projeto.titulo}</CardTitle>
+                    <div className="absolute right-0 top-0 flex items-start justify-end pr-2 pt-2">
+                        <div
+                            className="paper-flip border-l-[3.5rem] border-t-[3.5rem] opacity-20"
+                            style={{
+                                borderTopColor: getStatusHexColor(
+                                    projeto.status,
+                                ),
+                            }}
+                        />
+                        <IonIcon
+                            name={getIconName(projeto.status)}
+                            size="small"
+                            style={{
+                                color: getStatusHexColor(projeto.status),
+                            }}
+                        />
                     </div>
                     <CardDescription className="objetivoTruncado">
                         {projeto.objetivo}
                     </CardDescription>
-                    {/* paper flip effect done very wrong */}
-                    <div className="absolute right-0 top-0 flex h-14 w-14 items-start justify-end pr-2 pt-2">
-                        <div
-                            className="paper-flip border-l-[3.5rem] border-t-[3.5rem]"
-                            data-status={projeto.status}
-                        ></div>
-                        <IonIcon
-                            name="close-outline"
-                            size="small"
-                            className="text-white"
-                        />
-                    </div>
                 </CardHeader>
                 <CardContent>
-                    <div className="flex items-center gap-2">
-                        <div className="flex h-[1.125rem] w-[1.125rem] items-center justify-center">
-                            <span
-                                className="h-3 w-3 rounded-full opacity-85"
-                                style={{
-                                    backgroundColor: projeto.area.color,
-                                }}
-                            />
+                    <div className="flex items-center gap-3 text-muted">
+                        <div className="flex items-center gap-2 truncate">
+                            <Avatar>
+                                <AvatarImage
+                                    src={projeto.coordenador.fotoPerfil}
+                                    alt={`Foto do coordenador ${projeto.coordenador.nome}`}
+                                    width={100}
+                                    height={100}
+                                />
+                            </Avatar>
+                            <span className="truncate text-sm">
+                                {projeto.coordenador.nome}{' '}
+                                {projeto.coordenador.sobrenome}
+                            </span>
                         </div>
-                        <span className="text-sm text-muted">
+                        <div className="h-1 w-1 shrink-0 rounded-full bg-muted"></div>
+                        <span className="text-nowrap text-sm">
+                            {formatDateToTimeAgo(projeto.dataCriacao)}
+                        </span>
+                    </div>
+                </CardContent>
+                <CardFooter className="relative">
+                    <div
+                        className="absolute bottom-2 left-0 flex items-center gap-2 rounded-r-sm px-2 py-[.125rem] shadow-md"
+                        style={{
+                            backgroundColor: projeto.area.cor,
+                        }}
+                    >
+                        <span className="text-xs text-white">
                             {projeto.area.nome}
                         </span>
                     </div>
-                    <div className="flex items-center gap-2 text-muted">
-                        <IonIcon name="person-outline" size="small" />
-                        <span className="text-sm">
-                            {projeto.coordenador.nome}{' '}
-                            {projeto.coordenador.sobrenome}
-                        </span>
-                    </div>
-                    <div className="flex items-center gap-2 text-muted">
-                        <IonIcon name="calendar-outline" size="small" />
-                        <span className="text-sm">{projeto.dataCriacao}</span>
-                    </div>
-                </CardContent>
+                    <CardMenu />
+                </CardFooter>
             </Card>
         </Link>
     );
