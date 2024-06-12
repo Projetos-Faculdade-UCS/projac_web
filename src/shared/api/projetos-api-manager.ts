@@ -1,3 +1,4 @@
+import { Projeto, ProjetoResumido } from "../lib/types";
 import { BaseApiManager } from "./api-manager";
 
 export class ProjetosApiManager extends BaseApiManager {
