@@ -26,7 +26,10 @@ function InfoCardTitle({
     ...props
 }: HTMLAttributes<HTMLDivElement>) {
     return (
-        <span className={cn('text-xs text-muted', className)} {...props}>
+        <span
+            className={cn('text-xs text-muted-foreground', className)}
+            {...props}
+        >
             {children}
         </span>
     );

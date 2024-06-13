@@ -1,6 +1,5 @@
 'use client';
 import { Button } from '@/shared/ui/button';
-import { motion } from 'framer-motion';
 import { useState } from 'react';
 import styles from './descricao-collapse.module.scss';
 
@@ -14,20 +13,21 @@ export function DescricaoCollapse({ descricao }: DescricaoCollapseProps) {
 
     return (
         <div className="flex flex-col">
-            <motion.div
-                initial={{ height: 'auto' }}
-                animate={{ height: isCollapsed ? '4.5rem' : 'auto' }}
-                transition={{ duration: 0.5 }}
-                className={`${styles.truncate} overflow-hidden text-ellipsis`}
-                data-collapsed={isCollapsed}
+            <div
+                style={
+                    isCollapsed
+                        ? { WebkitLineClamp: '3' }
+                        : { WebkitLineClamp: 'unset' }
+                }
+                className={`${styles.truncate} overflow-hidden`}
             >
                 {descricao}
-            </motion.div>
+            </div>
             {descGrande && (
                 <Button
                     variant={'ghost'}
                     size={'sm'}
-                    className="self-end font-semibold"
+                    className="self-end text-xs font-semibold"
                     onClick={() => setIsCollapsed((state) => !state)}
                 >
                     {isCollapsed ? 'Ver mais' : 'Ver menos'}
