@@ -22,86 +22,102 @@ export async function InfosGerais({ promiseProj }: InfosGeraisProps) {
     const projeto = await promiseProj;
     return (
         <div className="flex min-h-[80vh] flex-col gap-6">
-            <div className="flex flex-wrap items-center gap-6 sm:gap-14">
-                <InfoCard
-                    icon={
-                        <IonIcon
-                            name={getIconName(projeto.status)}
-                            className="self-center text-2xl"
-                            style={{
-                                color: getStatusHexColor(projeto.status),
-                            }}
-                        />
-                    }
-                >
-                    <InfoCardTitle>Status</InfoCardTitle>
-                    <InfoCardContent>
-                        {getStatusLabel(projeto.status)}
-                    </InfoCardContent>
-                </InfoCard>
-                <InfoCard
-                    icon={
-                        <IonIcon
-                            name="calendar-clear-outline"
-                            className="self-center text-2xl text-primary"
-                        />
-                    }
-                >
-                    <InfoCardTitle>Data de criação</InfoCardTitle>
-                    <InfoCardContent>{projeto.dataCriacao}</InfoCardContent>
-                </InfoCard>
-                {projeto.dataConclusao && (
+            <div className="flex flex-row flex-wrap gap-2">
+                <div className="flex flex-col gap-6">
+                    <div className="flex flex-wrap items-center gap-6 sm:gap-14">
+                        <InfoCard
+                            icon={
+                                <IonIcon
+                                    name={getIconName(projeto.status)}
+                                    className="self-center text-2xl"
+                                    style={{
+                                        color: getStatusHexColor(
+                                            projeto.status,
+                                        ),
+                                    }}
+                                />
+                            }
+                        >
+                            <InfoCardTitle>Status</InfoCardTitle>
+                            <InfoCardContent>
+                                {getStatusLabel(projeto.status)}
+                            </InfoCardContent>
+                        </InfoCard>
+                        <InfoCard
+                            icon={
+                                <IonIcon
+                                    name="calendar-clear-outline"
+                                    className="self-center text-2xl text-primary"
+                                />
+                            }
+                        >
+                            <InfoCardTitle>Data de criação</InfoCardTitle>
+                            <InfoCardContent>
+                                {projeto.dataCriacao}
+                            </InfoCardContent>
+                        </InfoCard>
+                        {projeto.dataConclusao && (
+                            <InfoCard
+                                icon={
+                                    <IonIcon
+                                        name="calendar-outline"
+                                        className="self-center text-2xl text-primary"
+                                    />
+                                }
+                            >
+                                <InfoCardTitle>Data de conclusão</InfoCardTitle>
+                                <InfoCardContent>
+                                    {projeto.dataConclusao}
+                                </InfoCardContent>
+                            </InfoCard>
+                        )}
+                    </div>
+
                     <InfoCard
                         icon={
                             <IonIcon
-                                name="calendar-outline"
+                                name="bookmarks-outline"
                                 className="self-center text-2xl text-primary"
                             />
                         }
                     >
-                        <InfoCardTitle>Data de conclusão</InfoCardTitle>
-                        <InfoCardContent>
-                            {projeto.dataConclusao}
+                        <InfoCardTitle>Área & Subáreas</InfoCardTitle>
+                        <InfoCardContent className="flex flex-wrap items-center gap-2">
+                            <AreaCard area={projeto.area} />
+                            {projeto.subareas.map((subarea) => (
+                                <SubareaCard
+                                    key={subarea.id}
+                                    subarea={subarea}
+                                />
+                            ))}
                         </InfoCardContent>
                     </InfoCard>
-                )}
+
+                    {projeto.descricao && (
+                        <InfoCard
+                            icon={
+                                <IonIcon
+                                    name="reorder-four-outline"
+                                    className="text-2xl text-primary"
+                                />
+                            }
+                        >
+                            <InfoCardTitle>Descrição</InfoCardTitle>
+                            <InfoCardContent asChild>
+                                <DescricaoCollapse
+                                    descricao={projeto.descricao}
+                                />
+                            </InfoCardContent>
+                        </InfoCard>
+                    )}
+                </div>
+                <div className="flex h-96 w-44 shrink-0 bg-purple-200"></div>
             </div>
-
-            <InfoCard
-                icon={
-                    <IonIcon
-                        name="bookmarks-outline"
-                        className="self-center text-2xl text-primary"
-                    />
-                }
+            <Tabs
+                defaultValue="financeiro"
+                className="mt-10 flex h-full w-9/12 flex-col items-center justify-start self-center"
             >
-                <InfoCardTitle>Área & Subáreas</InfoCardTitle>
-                <InfoCardContent className="flex flex-wrap items-center gap-2">
-                    <AreaCard area={projeto.area} />
-                    {projeto.subareas.map((subarea) => (
-                        <SubareaCard key={subarea.id} subarea={subarea} />
-                    ))}
-                </InfoCardContent>
-            </InfoCard>
-
-            {projeto.descricao && (
-                <InfoCard
-                    icon={
-                        <IonIcon
-                            name="reorder-four-outline"
-                            className="text-2xl text-primary"
-                        />
-                    }
-                >
-                    <InfoCardTitle>Descrição</InfoCardTitle>
-                    <InfoCardContent asChild>
-                        <DescricaoCollapse descricao={projeto.descricao} />
-                    </InfoCardContent>
-                </InfoCard>
-            )}
-
-            <Tabs defaultValue="financeiro" className="mt-10 h-full ">
-                <TabsList className="mb-2">
+                <TabsList className="mb-2 w-[47rem]">
                     <TabsTrigger
                         value="producoes"
                         className="gap-2 text-base data-[state=active]:text-primary"
@@ -136,7 +152,10 @@ export async function InfosGerais({ promiseProj }: InfosGeraisProps) {
                 <TabsContent value="pesquisadores">
                     <PesquisadoresTab pesquisadores={projeto.pesquisadores} />
                 </TabsContent>
-                <TabsContent value="financeiro">
+                <TabsContent
+                    value="financeiro"
+                    className="flex justify-center rounded-md bg-white px-4 py-2"
+                >
                     <FinanceiroTab
                         valorSolicitado={projeto.valorSolicitado}
                         totalArrecadado={projeto.valorTotalArrecadado}
@@ -146,7 +165,10 @@ export async function InfosGerais({ promiseProj }: InfosGeraisProps) {
                 <TabsContent value="fomentadores">
                     <FomentadoresTab fomentadores={projeto.agenciasFomento} />
                 </TabsContent>
-                <TabsContent value="producoes">
+                <TabsContent
+                    value="producoes"
+                    className="flex justify-center rounded-md bg-white px-4 py-2"
+                >
                     <ProducoesTab producoes={projeto.producoesAcademicas} />
                 </TabsContent>
             </Tabs>
