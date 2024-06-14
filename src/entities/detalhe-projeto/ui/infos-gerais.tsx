@@ -10,7 +10,9 @@ import { AreaCard, SubareaCard } from './area-subaria';
 import { DescricaoCollapse } from './decricao-collapse';
 import { InfoCard, InfoCardContent, InfoCardTitle } from './info-card';
 import { FinanceiroTab } from './tab-contents/financeiro';
+import { FomentadoresTab } from './tab-contents/fomentadores';
 import { PesquisadoresTab } from './tab-contents/pesquisadores';
+import { ProducoesTab } from './tab-contents/producoes';
 
 type InfosGeraisProps = {
     promiseProj: Promise<Projeto>;
@@ -68,7 +70,7 @@ export async function InfosGerais({ promiseProj }: InfosGeraisProps) {
             <InfoCard
                 icon={
                     <IonIcon
-                        name="book-outline"
+                        name="bookmarks-outline"
                         className="self-center text-2xl text-primary"
                     />
                 }
@@ -101,11 +103,12 @@ export async function InfosGerais({ promiseProj }: InfosGeraisProps) {
             <Tabs defaultValue="financeiro" className="mt-10 h-full ">
                 <TabsList className="mb-2">
                     <TabsTrigger
-                        value="pesquisadores"
+                        value="producoes"
                         className="gap-2 text-base data-[state=active]:text-primary"
                     >
-                        <IonIcon name="people-outline" className="text-lg" />
-                        <span className="text-foreground">Pesquisadores</span>
+                        <IonIcon name="library-outline" className="text-lg" />
+
+                        <span className="text-foreground">Produções</span>
                     </TabsTrigger>
                     <TabsTrigger
                         value="financeiro"
@@ -115,20 +118,19 @@ export async function InfosGerais({ promiseProj }: InfosGeraisProps) {
                         <span className="text-foreground">Financeiro</span>
                     </TabsTrigger>
                     <TabsTrigger
+                        value="pesquisadores"
+                        className="gap-2 text-base data-[state=active]:text-primary"
+                    >
+                        <IonIcon name="people-outline" className="text-lg" />
+                        <span className="text-foreground">Pesquisadores</span>
+                    </TabsTrigger>
+                    <TabsTrigger
                         value="fomentadores"
                         className="gap-2 text-base data-[state=active]:text-primary"
                     >
                         <IonIcon name="business-outline" className="text-lg" />
 
                         <span className="text-foreground">Fomentadores</span>
-                    </TabsTrigger>
-                    <TabsTrigger
-                        value="producoes"
-                        className="gap-2 text-base data-[state=active]:text-primary"
-                    >
-                        <IonIcon name="library-outline" className="text-lg" />
-
-                        <span className="text-foreground">Produções</span>
                     </TabsTrigger>
                 </TabsList>
                 <TabsContent value="pesquisadores">
@@ -141,8 +143,12 @@ export async function InfosGerais({ promiseProj }: InfosGeraisProps) {
                         valoresArrecadados={projeto.valoresArrecadados}
                     />
                 </TabsContent>
-                <TabsContent value="fomentadores">Fomentadores</TabsContent>
-                <TabsContent value="producoes">Produções</TabsContent>
+                <TabsContent value="fomentadores">
+                    <FomentadoresTab fomentadores={projeto.agenciasFomento} />
+                </TabsContent>
+                <TabsContent value="producoes">
+                    <ProducoesTab producoes={projeto.producoesAcademicas} />
+                </TabsContent>
             </Tabs>
         </div>
     );

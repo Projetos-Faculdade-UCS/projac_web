@@ -10,7 +10,7 @@ export function PesquisadoresTab({ pesquisadores }: PesquisadoresTabProps) {
         <div className="flex flex-col gap-4">
             {pesquisadores.map((pesquisador) => (
                 <div key={pesquisador.id} className="flex items-center gap-4">
-                    <Avatar className="h-8 w-8">
+                    <Avatar className="h-[2.125rem] w-[2.125rem]">
                         <AvatarImage
                             src={pesquisador.fotoPerfil}
                             alt={`Foto do pesquisador ${pesquisador.nome}`}
