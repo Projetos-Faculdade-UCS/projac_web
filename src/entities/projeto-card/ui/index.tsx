@@ -11,7 +11,7 @@ import {
 import { IonIcon } from '@/shared/ui/ion-icon';
 import Link from 'next/link';
 import { formatDateToTimeAgo, getIconName, getStatusHexColor } from '../lib';
-import { CardMenu } from './card-menu';
+import { MenuCard } from './menu-card';
 import './paper-flip.scss';
 
 type ProjetoCardProps = {
@@ -27,7 +27,7 @@ export function ProjetoCard({ projeto }: ProjetoCardProps) {
                     borderColor: projeto.area.cor,
                 }}
             >
-                <CardHeader className="relative">
+                <CardHeader className="relative pb-3">
                     <CardTitle className="text-xl">{projeto.titulo}</CardTitle>
                     <div className="absolute right-0 top-0 flex items-start justify-end pr-2 pt-2">
                         <div
@@ -46,29 +46,23 @@ export function ProjetoCard({ projeto }: ProjetoCardProps) {
                             }}
                         />
                     </div>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-4 pt-0 text-muted-foreground">
                     <CardDescription className="objetivoTruncado">
                         {projeto.objetivo}
                     </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <div className="flex items-center gap-3 text-muted">
-                        <div className="flex items-center gap-2 truncate">
-                            <Avatar>
-                                <AvatarImage
-                                    src={projeto.coordenador.fotoPerfil}
-                                    alt={`Foto do coordenador ${projeto.coordenador.nome}`}
-                                    width={100}
-                                    height={100}
-                                />
-                            </Avatar>
-                            <span className="truncate text-sm">
-                                {projeto.coordenador.nome}{' '}
-                                {projeto.coordenador.sobrenome}
-                            </span>
-                        </div>
-                        <div className="h-1 w-1 shrink-0 rounded-full bg-muted"></div>
-                        <span className="text-nowrap text-sm">
-                            {formatDateToTimeAgo(projeto.dataCriacao)}
+                    <div className="flex items-center gap-2 truncate">
+                        <Avatar className="h-8 w-8">
+                            <AvatarImage
+                                src={projeto.coordenador.fotoPerfil}
+                                alt={`Foto do coordenador ${projeto.coordenador.nome}`}
+                                width={100}
+                                height={100}
+                            />
+                        </Avatar>
+                        <span className="truncate text-sm">
+                            {projeto.coordenador.nome}{' '}
+                            {projeto.coordenador.sobrenome}
                         </span>
                     </div>
                 </CardContent>
@@ -83,7 +77,12 @@ export function ProjetoCard({ projeto }: ProjetoCardProps) {
                             {projeto.area.nome}
                         </span>
                     </div>
-                    <CardMenu />
+                    <div className="absolute bottom-0 right-3 flex items-center gap-2 sm:gap-4">
+                        <span className="text-nowrap text-[.625rem] text-muted-foreground sm:text-xs">
+                            {formatDateToTimeAgo(projeto.dataCriacao)}
+                        </span>
+                        <MenuCard />
+                    </div>
                 </CardFooter>
             </Card>
         </Link>

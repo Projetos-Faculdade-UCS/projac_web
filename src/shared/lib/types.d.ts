@@ -30,6 +30,7 @@ export type ValorArrecadado = {
     id: number;
     valor: number;
     data: string;
+    descricao: string;
 }
 
 export type Subarea = {
@@ -39,6 +40,7 @@ export type Subarea = {
 }
 
 export type Pesquisador = {
+    id: number;
     nome: string;
     cargo: string;
     horas: number;

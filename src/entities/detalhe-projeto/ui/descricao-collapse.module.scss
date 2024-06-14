@@ -1,0 +1,6 @@
+.truncate{
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow-wrap: break-word;
+}
