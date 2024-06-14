@@ -7,18 +7,15 @@ import {
 } from '@/shared/ui/dropdown-menu';
 import { IonIcon } from '@/shared/ui/ion-icon';
 
-export function CardMenu() {
+export function MenuCard() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button
-                    variant={'link'}
-                    className="absolute bottom-0 right-3 p-0"
-                >
+                <Button variant={'link'} className="p-0">
                     <IonIcon
                         name="ellipsis-horizontal"
                         size="small"
-                        className="text-muted"
+                        className="text-muted-foreground"
                     />
                 </Button>
             </DropdownMenuTrigger>
