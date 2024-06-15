@@ -1,5 +1,5 @@
-import { HeaderProj } from '@/entities/detalhe-projeto/ui/header-proj';
-import { InfosGerais } from '@/entities/detalhe-projeto/ui/infos-gerais';
+import { DetalheProjeto } from '@/entities/detalhe-projeto/ui';
+import { HeaderProjeto } from '@/entities/detalhe-projeto/ui/header-proj';
 import { SidebarOuterTrigger } from '@/entities/side-bar/ui';
 import { ProjetosApiManager } from '@/shared/api/projetos-api-manager';
 import { IonIcon } from '@/shared/ui/ion-icon';
@@ -22,10 +22,8 @@ export default function ProjetoDetalhe({
                 </SidebarOuterTrigger>
             </div>
             <Suspense fallback={<Skeleton className="mb-2 h-4 w-56" />}>
-                <HeaderProj promiseProj={data} />
-            </Suspense>
-            <Suspense fallback={<div>Carregando...</div>}>
-                <InfosGerais promiseProj={data} />
+                <HeaderProjeto promiseProj={data} />
+                <DetalheProjeto promiseProj={data} />
             </Suspense>
         </main>
     );
