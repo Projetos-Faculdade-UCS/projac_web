@@ -4,12 +4,13 @@ import { HTMLAttributes, ReactNode } from 'react';
 
 type InfoCardProps = {
     children: ReactNode;
+    className?: string;
     icon?: ReactNode;
 };
 
-function InfoCard({ children, icon }: InfoCardProps) {
+function InfoCard({ children, icon, className }: InfoCardProps) {
     return (
-        <div className="flex items-center gap-4">
+        <div className={cn('flex items-center gap-4', className)}>
             {icon ? (
                 <div className="flex h-full">{icon}</div>
             ) : (
