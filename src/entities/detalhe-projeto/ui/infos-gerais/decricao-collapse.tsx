@@ -12,7 +12,7 @@ export function DescricaoCollapse({ descricao }: DescricaoCollapseProps) {
     const descGrande = descricao.length > 200;
 
     return (
-        <div className="flex flex-col">
+        <div className="flex shrink flex-col">
             <div
                 style={
                     isCollapsed

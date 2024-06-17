@@ -4,7 +4,7 @@ type HeaderProjProps = {
     promiseProj: Promise<Projeto>;
 };
 
-export async function HeaderProj({ promiseProj }: HeaderProjProps) {
+export async function HeaderProjeto({ promiseProj }: HeaderProjProps) {
     const { titulo, objetivo } = await promiseProj;
 
     return (

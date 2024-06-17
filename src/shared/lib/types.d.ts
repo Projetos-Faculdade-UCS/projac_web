@@ -42,6 +42,7 @@ export type Subarea = {
 export type Pesquisador = {
     id: number;
     nome: string;
+    sobrenome: string;
     cargo: string;
     horas: number;
     fotoPerfil: string;

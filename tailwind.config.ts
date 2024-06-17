@@ -49,6 +49,9 @@ const config = {
           DEFAULT: "var(--card)",
           foreground: "var(--card-foreground)",
         },
+        outline: {
+          DEFAULT: "var(--outline)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
