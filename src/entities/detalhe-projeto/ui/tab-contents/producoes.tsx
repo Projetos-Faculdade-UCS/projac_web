@@ -9,10 +9,7 @@ export function ProducoesTab({ producoes }: ProducoesTabProps) {
     return (
         <div className="flex flex-col gap-6">
             {producoes.map((producao) => (
-                <div
-                    key={producao.id}
-                    className="flex w-[45rem] items-center  gap-4"
-                >
+                <div key={producao.id} className="flex items-center  gap-4">
                     <div className="flex w-16 shrink-0 flex-col items-center gap-1">
                         <div className="w-fit rounded-full bg-purple-200/50 p-2">
                             <IonIcon

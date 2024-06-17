@@ -13,7 +13,7 @@ export function FinanceiroTab({
     valoresArrecadados,
 }: FinanceiroTabProps) {
     return (
-        <div className="flex flex-col gap-4">
+        <div className=" flex w-[47rem] flex-col justify-start gap-4 rounded-lg bg-white px-4 py-2 ">
             <div className="flex items-center gap-10">
                 <div className="flex flex-col">
                     <span className="text-sm text-muted-foreground">
@@ -54,7 +54,7 @@ export function FinanceiroTab({
                     <div className="flex flex-col gap-4">
                         {valoresArrecadados.map((valorArrecadado) => (
                             <div
-                                className="flex w-[45rem] items-center gap-4"
+                                className="flex items-center gap-4"
                                 key={valorArrecadado.id}
                             >
                                 <div className="rounded-full bg-green-200/50 p-2">
