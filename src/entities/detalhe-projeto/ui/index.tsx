@@ -15,38 +15,28 @@ export async function DetalheProjeto({ promiseProj }: InfosGeraisProps) {
     const projeto = await promiseProj;
     return (
         <div className="flex flex-col gap-6">
-            <div className="flex flex-row flex-wrap justify-between gap-10 lg:flex-nowrap">
+            <div className="grid grid-cols-12 gap-10">
                 <InfosGerais projeto={projeto} />
-                <div className="flex min-h-20 w-full shrink-0 flex-col gap-2 rounded-md bg-primary-foreground px-4 py-2 shadow-sm lg:w-64">
-                    <div className="flex items-center gap-2 text-base">
+
+                <div className="border-outline col-span-12 flex flex-col lg:col-span-3">
+                    <div className="border-outline  flex w-fit translate-y-[.0625rem] items-center gap-2 rounded-t-md border-x border-t bg-primary-foreground px-3 py-1 text-base">
                         <IonIcon
                             name="people-outline"
                             className="text-2xl text-primary"
                         />
-                        <span className="text-xs text-muted-foreground">
+                        <span className="text-base font-medium">
                             Pesquisadores
                         </span>
                     </div>
                     <PesquisadoresTab pesquisadores={projeto.pesquisadores} />
                 </div>
             </div>
-            <div className=" grid gap-10">
+            <div className="grid grid-cols-12 gap-10">
                 <Tabs
                     defaultValue="financeiro"
-                    className="mt-10 flex w-full flex-col items-start"
+                    className="col-span-12 w-full lg:col-span-9"
                 >
-                    <TabsList className="mb-2 w-[47rem] justify-start">
-                        <TabsTrigger
-                            value="producoes"
-                            className="gap-2 text-base data-[state=active]:text-primary"
-                        >
-                            <IonIcon
-                                name="library-outline"
-                                className="text-lg"
-                            />
-
-                            <span className="text-foreground">Produções</span>
-                        </TabsTrigger>
+                    <TabsList className="justify-start">
                         <TabsTrigger
                             value="financeiro"
                             className="gap-2 text-base data-[state=active]:text-primary"
@@ -80,13 +70,18 @@ export async function DetalheProjeto({ promiseProj }: InfosGeraisProps) {
                             fomentadores={projeto.agenciasFomento}
                         />
                     </TabsContent>
-                    <TabsContent
-                        value="producoes"
-                        className="flex justify-center rounded-md bg-white px-4 py-2"
-                    >
-                        <ProducoesTab producoes={projeto.producoesAcademicas} />
-                    </TabsContent>
                 </Tabs>
+                <div className="border-outline col-span-12 row-start-1 flex flex-col gap-2 rounded-md border bg-primary-foreground px-4 py-2 shadow-sm lg:col-span-3 lg:row-start-auto">
+                    <div className="flex items-center gap-2 text-base">
+                        <IonIcon
+                            name="library-outline"
+                            className="text-2xl text-primary"
+                        />
+
+                        <span className="text-base font-medium">Produções</span>
+                    </div>
+                    <ProducoesTab producoes={projeto.producoesAcademicas} />
+                </div>
             </div>
         </div>
     );

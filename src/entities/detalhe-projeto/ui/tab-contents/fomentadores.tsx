@@ -17,9 +17,7 @@ export function FomentadoresTab({ fomentadores }: FomentadoresTabProps) {
                         />
                     </div>
                     <div className="flex flex-col">
-                        <span className="text-base font-semibold">
-                            {fomentador.nome}
-                        </span>
+                        <span className="text-base">{fomentador.nome}</span>
                         <span className="text-sm text-muted-foreground">
                             {fomentador.sigla}
                         </span>

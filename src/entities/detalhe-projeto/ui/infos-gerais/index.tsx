@@ -15,7 +15,7 @@ type InfosGeraisProps = {
 
 export function InfosGerais({ projeto }: InfosGeraisProps) {
     return (
-        <div className="flex shrink flex-col gap-6">
+        <div className="col-span-12 flex flex-col gap-6 lg:col-span-9">
             <div className="flex flex-wrap items-center gap-6">
                 <InfoCard
                     className="mr-8"
@@ -73,7 +73,7 @@ export function InfosGerais({ projeto }: InfosGeraisProps) {
                 }
             >
                 <InfoCardTitle>Área & Subáreas</InfoCardTitle>
-                <InfoCardContent className="flex flex-wrap items-center gap-2">
+                <InfoCardContent className="flex shrink flex-wrap items-center gap-2">
                     <AreaCard area={projeto.area} />
                     {projeto.subareas.map((subarea) => (
                         <SubareaCard key={subarea.id} subarea={subarea} />
