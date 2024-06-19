@@ -14,7 +14,7 @@ const TabsList = React.forwardRef<
     <TabsPrimitive.List
         ref={ref}
         className={cn(
-            'inline-flex items-center justify-center rounded-lg bg-muted text-muted-foreground',
+            'inline-flex items-center justify-center rounded-t-lg bg-muted text-muted-foreground',
             className,
         )}
         {...props}
@@ -29,7 +29,7 @@ const TabsTrigger = React.forwardRef<
     <TabsPrimitive.Trigger
         ref={ref}
         className={cn(
-            'data-[state=active]:border-outline relative inline-flex items-center justify-center whitespace-nowrap rounded-t-md border-x border-t px-3 py-1 text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:translate-y-[.0625rem] data-[state=inactive]:border-none data-[state=active]:bg-white data-[state=active]:font-medium data-[state=active]:text-foreground',
+            'relative inline-flex items-center justify-center whitespace-nowrap rounded-t-md border-x border-t px-3 py-1 text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:translate-y-[.0625rem] data-[state=inactive]:border-none data-[state=active]:border-outline data-[state=active]:bg-white data-[state=active]:font-medium data-[state=active]:text-foreground',
             className,
         )}
         {...props}
@@ -46,7 +46,7 @@ const TabsContent = React.forwardRef<
     <TabsPrimitive.Content
         ref={ref}
         className={cn(
-            'border-outline rounded-lg rounded-tl-none border-[0.0625rem] bg-white px-4 py-3 shadow-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+            'rounded-lg rounded-tl-none border-[0.0625rem] border-outline bg-white px-4 py-3 shadow-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
             className,
         )}
         {...props}

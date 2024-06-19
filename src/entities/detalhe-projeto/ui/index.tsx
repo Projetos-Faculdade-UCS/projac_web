@@ -15,14 +15,14 @@ export async function DetalheProjeto({ promiseProj }: InfosGeraisProps) {
     const projeto = await promiseProj;
     return (
         <div className="flex flex-col gap-6">
-            <div className="grid grid-cols-12 gap-10">
+            <div className="grid grid-cols-1 gap-10 xl:grid-cols-12">
                 <InfosGerais projeto={projeto} />
 
-                <div className="border-outline col-span-12 flex flex-col lg:col-span-3">
-                    <div className="border-outline  flex w-fit translate-y-[.0625rem] items-center gap-2 rounded-t-md border-x border-t bg-primary-foreground px-3 py-1 text-base">
+                <div className="flex flex-col border-outline xl:col-span-3">
+                    <div className="flex w-fit translate-y-[.0625rem] items-center gap-2 rounded-t-md border-x border-t border-outline bg-primary-foreground px-3 py-1 text-base">
                         <IonIcon
                             name="people-outline"
-                            className="text-2xl text-primary"
+                            className="text-lg text-primary"
                         />
                         <span className="text-base font-medium">
                             Pesquisadores
@@ -31,10 +31,10 @@ export async function DetalheProjeto({ promiseProj }: InfosGeraisProps) {
                     <PesquisadoresTab pesquisadores={projeto.pesquisadores} />
                 </div>
             </div>
-            <div className="grid grid-cols-12 gap-10">
+            <div className="grid grid-cols-1 gap-10 pb-4 xl:grid-cols-12">
                 <Tabs
                     defaultValue="financeiro"
-                    className="col-span-12 w-full lg:col-span-9"
+                    className="w-full xl:col-span-9"
                 >
                     <TabsList className="justify-start">
                         <TabsTrigger
@@ -58,24 +58,30 @@ export async function DetalheProjeto({ promiseProj }: InfosGeraisProps) {
                             </span>
                         </TabsTrigger>
                     </TabsList>
-                    <TabsContent asChild value="financeiro">
+                    <TabsContent
+                        asChild
+                        value="financeiro"
+                        className="max-h-96 min-h-64"
+                    >
                         <FinanceiroTab
                             valorSolicitado={projeto.valorSolicitado}
                             totalArrecadado={projeto.valorTotalArrecadado}
-                            valoresArrecadados={projeto.valoresArrecadados}
+                            valoresArrecadados={projeto.valoresArrecadados
+                                .concat(projeto.valoresArrecadados)
+                                .concat(projeto.valoresArrecadados)}
                         />
                     </TabsContent>
-                    <TabsContent value="fomentadores">
+                    <TabsContent value="fomentadores" className="min-h-64">
                         <FomentadoresTab
                             fomentadores={projeto.agenciasFomento}
                         />
                     </TabsContent>
                 </Tabs>
-                <div className="border-outline col-span-12 row-start-1 flex flex-col gap-2 rounded-md border bg-primary-foreground px-4 py-2 shadow-sm lg:col-span-3 lg:row-start-auto">
-                    <div className="flex items-center gap-2 text-base">
+                <div className="row-start-1 flex flex-col xl:col-span-3 xl:row-start-auto">
+                    <div className="flex w-fit translate-y-[.0625rem] items-center gap-2 rounded-t-md border-x border-t border-outline bg-primary-foreground px-3 py-1 text-base ">
                         <IonIcon
                             name="library-outline"
-                            className="text-2xl text-primary"
+                            className="text-lg text-primary"
                         />
 
                         <span className="text-base font-medium">Produções</span>
