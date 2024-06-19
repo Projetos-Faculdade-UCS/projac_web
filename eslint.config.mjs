@@ -9,9 +9,9 @@ export default [
   {languageOptions: { globals: globals.browser }},
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-  pluginReactConfig,
-  // https://github.com/prettier/eslint-config-prettier#installation
-  eslintConfigPrettier,
+  // pluginReactConfig,
+  // // https://github.com/prettier/eslint-config-prettier#installation
+  // eslintConfigPrettier,
   {
     rules:{
       'react/react-in-jsx-scope': 'off',
