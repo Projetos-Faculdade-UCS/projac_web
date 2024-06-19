@@ -29,4 +29,9 @@ export class ProjetosApiManager extends BaseApiManager {
 
         return response.data;
     }
+    public async criarProjeto(projeto: Projeto) {
+        const api = this.getApi();
+        const response = await api.post<Projeto>('/projetos', projeto);
+        return response.data;
+    }
 }

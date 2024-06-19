@@ -15,7 +15,7 @@ type InfosGeraisProps = {
 
 export function InfosGerais({ projeto }: InfosGeraisProps) {
     return (
-        <div className="col-span-12 flex flex-col gap-6 lg:col-span-9">
+        <div className="flex flex-col gap-6 xl:col-span-9">
             <div className="flex flex-wrap items-center gap-6">
                 <InfoCard
                     className="mr-8"
