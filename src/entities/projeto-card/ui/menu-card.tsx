@@ -11,7 +11,7 @@ export function MenuCard() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant={'link'} className="p-0">
+                <Button variant={'link'} className="p-0 focus-visible:ring-0">
                     <IonIcon
                         name="ellipsis-horizontal"
                         size="small"

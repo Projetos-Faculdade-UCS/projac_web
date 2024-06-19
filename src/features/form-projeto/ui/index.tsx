@@ -1,18 +1,13 @@
 'use client';
 import { Button } from '@/shared/ui/button';
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/shared/ui/form';
-import { Input } from '@/shared/ui/input';
+import { Form } from '@/shared/ui/form';
+import { IonIcon } from '@/shared/ui/ion-icon';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ProjetoSchema, projetoSchema } from '../lib/schema';
+import { InfosGerais } from './form-steps/infos-gerais';
 
 export function FormProjeto() {
     const [formData, setFormData] = useState<ProjetoSchema | null>(null);
@@ -21,9 +16,9 @@ export function FormProjeto() {
         defaultValues: {
             titulo: '',
             // objetivo: '',
-            // descricao: '',
-            // valorSolicitado: 0,
-            // dataConclusao: null,
+            descricao: '',
+            valorSolicitado: 0,
+            dataConclusao: null,
             // producoesAcademicas: [],
             // valoresArrecadados: [],
         },
@@ -31,29 +26,29 @@ export function FormProjeto() {
 
     return (
         <Form {...form}>
-            <form
-                id={'pedro'}
-                onSubmit={form.handleSubmit((data) => setFormData(data))}
-            >
-                <FormField
-                    control={form.control}
-                    name="titulo"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Título</FormLabel>
-                            <FormControl>
-                                <Input {...field} placeholder="Título" />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit" variant={'outline'} className="mt-4">
-                    Criar Projeto
-                </Button>
+            <form onSubmit={form.handleSubmit((data) => setFormData(data))}>
+                <InfosGerais control={form.control} />
+                <div className="flex w-full justify-end gap-4">
+                    <Button variant={'outline'} className="mt-4">
+                        <Link href="/projetos">Cancelar</Link>
+                    </Button>
+
+                    <Button
+                        type="submit"
+                        variant={'default'}
+                        className=" mt-4 gap-2 "
+                    >
+                        <IonIcon name="save-outline" />
+                        Salvar
+                    </Button>
+                </div>
             </form>
             <div className="mt-4">
-                <pre>{JSON.stringify(formData, null, 2)}</pre>
+                <pre className="rounded-md bg-slate-950 p-4">
+                    <code className="text-white">
+                        {JSON.stringify(formData, null, 2)}
+                    </code>
+                </pre>
             </div>
         </Form>
     );
