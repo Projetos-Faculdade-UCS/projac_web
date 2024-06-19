@@ -10,7 +10,7 @@ type IonIconProps = {
 export function IonIcon({ name, size, className, style }: IonIconProps) {
     const IonIcon = 'ion-icon';
     return (
-        // @ts-ignore
+        // @ts-expect-error - IonIcon is a global component
         <IonIcon name={name} size={size} class={className} style={style} />
     );
 }
