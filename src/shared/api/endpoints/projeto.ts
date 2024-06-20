@@ -1,18 +1,18 @@
-import { Projeto, ProjetoResumido } from "../lib/types";
-import { BaseApiManager } from "./api-manager";
+import { Projeto, ProjetoResumido } from "../../lib/types";
+import { BaseApiManager } from "../api-manager";
 
-export class ProjetosApiManager extends BaseApiManager {
-    private static instance: ProjetosApiManager;
+export class ProjetoApi extends BaseApiManager {
+    private static instance: ProjetoApi;
 
     private constructor() {
         super();
     }
 
-    public static getInstance(): ProjetosApiManager {
-        if (!ProjetosApiManager.instance) {
-            ProjetosApiManager.instance = new ProjetosApiManager();
+    public static getInstance(): ProjetoApi {
+        if (!ProjetoApi.instance) {
+            ProjetoApi.instance = new ProjetoApi();
         }
-        return ProjetosApiManager.instance;
+        return ProjetoApi.instance;
     }
 
     public async getProjetos() {
