@@ -20,18 +20,22 @@ type InfoGeraisProps = {
 
 export function InfosGerais({ control }: InfoGeraisProps) {
     return (
-        <div className="grid grid-cols-2 gap-x-4 gap-y-8 xl:grid-cols-12">
+        <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-4 xl:grid-cols-12">
             <FormField
                 control={control}
                 name="titulo"
                 render={({ field }) => (
-                    <FormItem className="col-span-1 flex flex-col justify-start xl:col-span-9">
+                    <FormItem className="flex flex-col justify-start md:col-span-3 xl:col-span-9">
                         <FormLabel>
                             Título
                             <FormRequiredIndicator formSchema={projetoSchema} />
                         </FormLabel>
                         <FormControl>
-                            <Input {...field} placeholder="Título" />
+                            <Input
+                                {...field}
+                                placeholder="Meu projeto"
+                                className="text-base sm:text-sm"
+                            />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -42,7 +46,7 @@ export function InfosGerais({ control }: InfoGeraisProps) {
                 control={control}
                 name="area"
                 render={({ field }) => (
-                    <FormItem className="col-span-1 flex flex-col justify-start xl:col-span-3">
+                    <FormItem className="flex flex-col justify-start xl:col-span-3">
                         <FormLabel>
                             Área
                             <FormRequiredIndicator formSchema={projetoSchema} />
@@ -59,7 +63,7 @@ export function InfosGerais({ control }: InfoGeraisProps) {
                 control={control}
                 name="objetivo"
                 render={({ field }) => (
-                    <FormItem className="col-span-1 flex flex-col justify-start xl:col-span-6">
+                    <FormItem className="flex flex-col justify-start md:col-span-2 xl:col-span-6">
                         <FormLabel>
                             Objetivo
                             <FormRequiredIndicator formSchema={projetoSchema} />
@@ -67,8 +71,8 @@ export function InfosGerais({ control }: InfoGeraisProps) {
                         <FormControl>
                             <Textarea
                                 {...field}
-                                placeholder="Objetivo"
-                                className="h-28"
+                                placeholder="Vamos fazer algo incrível!"
+                                className="h-28 text-base sm:text-sm"
                             />
                         </FormControl>
                         <FormMessage />
@@ -80,7 +84,7 @@ export function InfosGerais({ control }: InfoGeraisProps) {
                 control={control}
                 name="subareas"
                 render={({ field }) => (
-                    <FormItem className="col-span-1 flex flex-col justify-start xl:col-span-6">
+                    <FormItem className="flex flex-col justify-start md:col-span-2 xl:col-span-6">
                         <FormLabel>
                             Subáreas
                             <FormRequiredIndicator formSchema={projetoSchema} />
@@ -97,13 +101,17 @@ export function InfosGerais({ control }: InfoGeraisProps) {
                 control={control}
                 name="descricao"
                 render={({ field }) => (
-                    <FormItem className="col-span-12">
+                    <FormItem className="md:col-span-4 xl:col-span-12">
                         <FormLabel>
                             Descrição
                             <FormRequiredIndicator formSchema={projetoSchema} />
                         </FormLabel>
                         <FormControl>
-                            <Textarea {...field} placeholder="Descrição" />
+                            <Textarea
+                                {...field}
+                                placeholder="Conte mais..."
+                                className="text-base sm:text-sm"
+                            />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -113,13 +121,17 @@ export function InfosGerais({ control }: InfoGeraisProps) {
                 control={control}
                 name="valorSolicitado"
                 render={({ field }) => (
-                    <FormItem className="col-span-1 flex flex-col justify-start xl:col-span-2">
+                    <FormItem className="flex flex-col justify-start xl:col-span-2">
                         <FormLabel>
                             Valor solicitado
                             <FormRequiredIndicator formSchema={projetoSchema} />
                         </FormLabel>
                         <FormControl>
-                            <CurrencyInput {...field} placeholder="R$ 0,00" />
+                            <CurrencyInput
+                                {...field}
+                                placeholder="R$ 0,00"
+                                className="text-base sm:text-sm"
+                            />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
