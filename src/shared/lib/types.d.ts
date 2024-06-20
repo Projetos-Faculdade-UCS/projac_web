@@ -26,6 +26,13 @@ export type ProducaoAcademica = {
     descricao: string;
 }
 
+export type Area = {
+    id: number;
+    nome: string;
+    cor: string;
+    // subareas: Subarea[];
+}
+
 export type ValorArrecadado = {
     id: number;
     valor: number;

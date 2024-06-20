@@ -61,14 +61,12 @@ export async function DetalheProjeto({ promiseProj }: InfosGeraisProps) {
                     <TabsContent
                         asChild
                         value="financeiro"
-                        className="max-h-96 min-h-64"
+                        className="max-h-72 min-h-64"
                     >
                         <FinanceiroTab
                             valorSolicitado={projeto.valorSolicitado}
                             totalArrecadado={projeto.valorTotalArrecadado}
-                            valoresArrecadados={projeto.valoresArrecadados
-                                .concat(projeto.valoresArrecadados)
-                                .concat(projeto.valoresArrecadados)}
+                            valoresArrecadados={projeto.valoresArrecadados}
                         />
                     </TabsContent>
                     <TabsContent value="fomentadores" className="min-h-64">
