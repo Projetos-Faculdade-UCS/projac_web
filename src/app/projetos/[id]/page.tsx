@@ -1,7 +1,7 @@
 import { DetalheProjeto } from '@/entities/detalhe-projeto/ui';
 import { HeaderProjeto } from '@/entities/detalhe-projeto/ui/header-proj';
 import { SidebarOuterTrigger } from '@/entities/side-bar/ui';
-import { ProjetosApiManager } from '@/shared/api/projetos-api-manager';
+import { ProjetoApi } from '@/shared/api/endpoints/projeto';
 import { IonIcon } from '@/shared/ui/ion-icon';
 import { Skeleton } from '@/shared/ui/skeleton';
 import { Suspense } from 'react';
@@ -13,7 +13,7 @@ export default function ProjetoDetalhe({
         id: string;
     };
 }) {
-    const data = ProjetosApiManager.getInstance().getProjeto(params.id);
+    const data = ProjetoApi.getInstance().getProjeto(params.id);
     return (
         <main className="flex w-full flex-col overflow-y-scroll bg-background p-3 pb-5 text-foreground md:px-10">
             <div className="flex items-center">

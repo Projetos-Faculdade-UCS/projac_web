@@ -20,6 +20,7 @@ const CurrencyInput = React.forwardRef<
             )}
             defaultValue={value}
             decimalSeparator=","
+            type="decimal"
             groupSeparator="."
             prefix={'R$ '}
             onValueChange={(_, __, values) => onChange(values?.float)}

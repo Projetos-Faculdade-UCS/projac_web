@@ -19,17 +19,19 @@ z.setErrorMap(zodI18nMap);
 
 export const projetoSchema = z.object({
     titulo: z.string().min(15).max(255),
-    // objetivo: z.string().min(1).max(400),
-    descricao: z.string(),
-    valorSolicitado: z.number().min(0).refine((value) => {
+    objetivo: z.string().min(1).max(400),
+    descricao: z.string().optional(),
+    valorSolicitado: z.number().gt(0, {message: 
+        "Valor deve ser maior que 0"
+    }).refine((value) => {
         return value.toString().length < 11
     }
     , {
-        message: "O valor solicitado deve ser menor que 11 dígitos"
+        message: "Valor deve ser menor que 11 dígitos"
     }),
-    dataConclusao: z.date().nullable(),
-    // area: z.number().int().positive(),
-    area: z.string().min(1),
+    dataConclusao: z.date().optional(),
+    area: z.string().min(1, { message: "Selecione uma área" }),
+    subareas: z.array(z.string().min(1)).optional(),
     // producoesAcademicas: z.array(z.object({
     //     titulo: z.string().min(1).max(255),
     //     descicao: z.string().max(400),
@@ -43,3 +45,17 @@ export const projetoSchema = z.object({
 })
 
 export type ProjetoSchema = z.infer<typeof projetoSchema>
+
+
+/**
+ * Função auxiliar para verificar se um campo é obrigatório
+ */
+export function isFieldRequired(schema: z.ZodObject<z.ZodRawShape>, fieldName: string): boolean {
+    const shape = schema.shape;
+    const field = shape[fieldName];
+    
+    if (field.isOptional() || field.isNullable()) {
+        return false;
+    }
+    return true;
+};

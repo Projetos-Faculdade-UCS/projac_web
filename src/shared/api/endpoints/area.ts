@@ -1,5 +1,5 @@
-import { Area } from '../lib/types';
-import { BaseApiManager } from './api-manager';
+import { Area } from '../../lib/types';
+import { BaseApiManager } from '../api-manager';
 
 export class AreaApi extends BaseApiManager {
     private static instance: AreaApi;

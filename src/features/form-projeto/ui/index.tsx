@@ -15,11 +15,10 @@ export function FormProjeto() {
         resolver: zodResolver(projetoSchema),
         defaultValues: {
             titulo: '',
-            // objetivo: '',
-            descricao: '',
+            objetivo: '',
             valorSolicitado: 0,
-            dataConclusao: null,
             area: '',
+            subareas: [],
             // producoesAcademicas: [],
             // valoresArrecadados: [],
         },

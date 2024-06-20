@@ -12,40 +12,40 @@ import { ControllerRenderProps } from 'react-hook-form';
 import { getAreas } from '../../api/server';
 import { ProjetoSchema } from '../../lib/schema';
 
-type SelectArea = ControllerRenderProps<ProjetoSchema, 'area'>;
+type SelectAreaProps = ControllerRenderProps<ProjetoSchema, 'area'>;
 
-const SelectArea = React.forwardRef<HTMLSelectElement, Omit<SelectArea, 'ref'>>(
-    ({ onChange, value, ...props }, ref) => {
-        const [areas, setAreas] = React.useState<Area[]>([]);
-        React.useEffect(() => {
-            getAreas().then((areas) => setAreas(areas));
-        }, []);
+const SelectArea = React.forwardRef<
+    HTMLSelectElement,
+    Omit<SelectAreaProps, 'ref'>
+>(({ onChange, value, ...props }, ref) => {
+    const [areas, setAreas] = React.useState<Area[]>([]);
+    React.useEffect(() => {
+        getAreas().then((areas) => setAreas(areas));
+    }, []);
 
-        return (
-            <Select onValueChange={onChange} defaultValue={value}>
-                <SelectTrigger>
-                    <SelectValue
-                        placeholder="Selecione uma área"
-                        ref={ref}
-                        {...props}
-                    />
-                </SelectTrigger>
-                <SelectContent>
-                    {areas.map((area) => (
-                        <SelectItem key={area.id} value={String(area.id)}>
-                            <span
-                                className=" mr-2 inline-block h-3 w-3 rounded-full"
-                                style={{ backgroundColor: area.cor }}
-                            />
-
-                            {area.nome}
-                        </SelectItem>
-                    ))}
-                </SelectContent>
-            </Select>
-        );
-    },
-);
+    return (
+        <Select onValueChange={onChange} defaultValue={value}>
+            <SelectTrigger>
+                <SelectValue
+                    placeholder="Selecione uma área"
+                    ref={ref}
+                    {...props}
+                />
+            </SelectTrigger>
+            <SelectContent>
+                {areas.map((area) => (
+                    <SelectItem key={area.id} value={String(area.id)}>
+                        <span
+                            className=" mr-2 inline-block h-3 w-3 rounded-full"
+                            style={{ backgroundColor: area.cor }}
+                        />
+                        {area.nome}
+                    </SelectItem>
+                ))}
+            </SelectContent>
+        </Select>
+    );
+});
 
 SelectArea.displayName = 'SelectArea';
 
