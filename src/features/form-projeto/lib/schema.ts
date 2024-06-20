@@ -29,6 +29,7 @@ export const projetoSchema = z.object({
     }),
     dataConclusao: z.date().nullable(),
     // area: z.number().int().positive(),
+    area: z.string().min(1),
     // producoesAcademicas: z.array(z.object({
     //     titulo: z.string().min(1).max(255),
     //     descicao: z.string().max(400),

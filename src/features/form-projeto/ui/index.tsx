@@ -19,6 +19,7 @@ export function FormProjeto() {
             descricao: '',
             valorSolicitado: 0,
             dataConclusao: null,
+            area: '',
             // producoesAcademicas: [],
             // valoresArrecadados: [],
         },

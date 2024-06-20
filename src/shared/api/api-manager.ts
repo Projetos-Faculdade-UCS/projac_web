@@ -35,7 +35,6 @@ export abstract class BaseApiManager {
             headerInterpreter: () => {
                 return this.cacheTime;
             }
-        
         });
     }
 

@@ -11,6 +11,7 @@ import { Control } from 'react-hook-form';
 import { ProjetoSchema } from '../../lib/schema';
 import { CurrencyInput } from '../custom-inputs/currency';
 import { DatePickerInput } from '../custom-inputs/date-picker';
+import { SelectArea } from '../custom-inputs/select-area';
 
 type InfoGeraisProps = {
     control: Control<ProjetoSchema>;
@@ -73,12 +74,12 @@ export function InfosGerais({ control }: InfoGeraisProps) {
             />
             <FormField
                 control={control}
-                name="dataConclusao"
+                name="area"
                 render={({ field }) => (
-                    <FormItem className="col-span-4 flex flex-col justify-center md:col-span-1">
-                        <FormLabel>Data de conclusão</FormLabel>
+                    <FormItem className="col-span-4 flex flex-col justify-center md:col-span-2">
+                        <FormLabel>Área</FormLabel>
                         <FormControl>
-                            <DatePickerInput {...field} />
+                            <SelectArea {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
