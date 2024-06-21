@@ -1,16 +1,17 @@
 'use client';
-import { Button } from '@/shared/ui/button';
+import { Carousel, CarouselContent, CarouselItem } from '@/shared/ui/carousel';
 import { Form } from '@/shared/ui/form';
-import { IonIcon } from '@/shared/ui/ion-icon';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ProjetoSchema, projetoSchema } from '../lib/schema';
+import { FormResumo } from './form-steps/form-resumo';
 import { InfosGerais } from './form-steps/infos-gerais';
+import { Participantes } from './form-steps/participantes';
+import { Resultados } from './form-steps/resultados';
+import { StepperControlBar } from './stepper-control-bar';
+import { StepperProgressBar } from './stepper-progress-bar';
 
 export function FormProjeto() {
-    const [formData, setFormData] = useState<ProjetoSchema | null>(null);
     const form = useForm<ProjetoSchema>({
         resolver: zodResolver(projetoSchema),
         defaultValues: {
@@ -26,30 +27,26 @@ export function FormProjeto() {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit((data) => setFormData(data))}>
-                <InfosGerais control={form.control} />
-                <div className="flex w-full justify-end gap-4">
-                    <Button variant={'outline'} className="mt-4">
-                        <Link href="/projetos">Cancelar</Link>
-                    </Button>
-
-                    <Button
-                        type="submit"
-                        variant={'default'}
-                        className=" mt-4 gap-2 "
-                    >
-                        <IonIcon name="save-outline" />
-                        Salvar
-                    </Button>
-                </div>
+            <form onSubmit={form.handleSubmit(console.log)}>
+                <Carousel>
+                    <StepperProgressBar />
+                    <CarouselContent className="py-6">
+                        <CarouselItem className="pl-5 pr-2">
+                            <InfosGerais control={form.control} />
+                        </CarouselItem>
+                        <CarouselItem className="pl-6">
+                            <Participantes control={form.control} />
+                        </CarouselItem>
+                        <CarouselItem className="pl-6">
+                            <Resultados control={form.control} />
+                        </CarouselItem>
+                        <CarouselItem className="pl-6">
+                            <FormResumo />
+                        </CarouselItem>
+                    </CarouselContent>
+                    <StepperControlBar />
+                </Carousel>
             </form>
-            <div className="mt-4">
-                <pre className="rounded-md bg-slate-950 p-4">
-                    <code className="text-white">
-                        {JSON.stringify(formData, null, 2)}
-                    </code>
-                </pre>
-            </div>
         </Form>
     );
 }
