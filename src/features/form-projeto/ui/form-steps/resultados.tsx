@@ -16,14 +16,16 @@ type ResultadosProps = {
 
 export function Resultados({ control }: ResultadosProps) {
     return (
-        <div className="col-span-4 grid gap-4">
+        <div className="grid gap-4 md:grid-cols-4 xl:col-span-4">
             {' '}
-            <span className="text-lg font-medium">Resultados</span>
+            <span className="text-lg font-medium xl:col-span-4">
+                Resultados
+            </span>
             <FormField
                 control={control}
                 name="dataConclusao"
                 render={({ field }) => (
-                    <FormItem className="col-span-4 flex flex-col justify-center md:col-span-1">
+                    <FormItem className="flex flex-col justify-center xl:col-span-1">
                         <FormLabel>
                             Data de conclusão
                             <FormRequiredIndicator formSchema={projetoSchema} />

@@ -10,8 +10,8 @@ export default function NovoProjeto() {
                     <IonIcon name="menu-outline" size="large" />
                 </SidebarOuterTrigger>
                 <span className="flex items-center text-xl text-primary">
-                    <IonIcon name="document-text-outline" className="mr-2" />
-                    <span className="font-medium">Novo Projeto</span>
+                    <span className="mr-2">🎉</span>
+                    <span className="font-medium">Novo projeto</span>
                 </span>
             </div>
             <FormProjeto />
