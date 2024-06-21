@@ -20,7 +20,7 @@ type InfoGeraisProps = {
 
 export function InfosGerais({ control }: InfoGeraisProps) {
     return (
-        <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-4 xl:grid-cols-12">
+        <div className="grid grid-flow-row-dense grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-4 xl:grid-cols-12">
             <FormField
                 control={control}
                 name="titulo"
@@ -44,6 +44,26 @@ export function InfosGerais({ control }: InfoGeraisProps) {
 
             <FormField
                 control={control}
+                name="objetivo"
+                render={({ field }) => (
+                    <FormItem className="flex flex-col justify-start md:col-span-2 xl:col-span-6">
+                        <FormLabel>
+                            Objetivo
+                            <FormRequiredIndicator formSchema={projetoSchema} />
+                        </FormLabel>
+                        <FormControl>
+                            <Textarea
+                                {...field}
+                                placeholder="Vamos fazer algo incrível!"
+                                className="text-base sm:h-28 sm:text-sm"
+                            />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                )}
+            />
+            <FormField
+                control={control}
                 name="area"
                 render={({ field }) => (
                     <FormItem className="flex flex-col justify-start xl:col-span-3">
@@ -58,28 +78,6 @@ export function InfosGerais({ control }: InfoGeraisProps) {
                     </FormItem>
                 )}
             />
-
-            <FormField
-                control={control}
-                name="objetivo"
-                render={({ field }) => (
-                    <FormItem className="flex flex-col justify-start md:col-span-2 xl:col-span-6">
-                        <FormLabel>
-                            Objetivo
-                            <FormRequiredIndicator formSchema={projetoSchema} />
-                        </FormLabel>
-                        <FormControl>
-                            <Textarea
-                                {...field}
-                                placeholder="Vamos fazer algo incrível!"
-                                className="h-28 text-base sm:text-sm"
-                            />
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
-
             <FormField
                 control={control}
                 name="subareas"
@@ -87,6 +85,9 @@ export function InfosGerais({ control }: InfoGeraisProps) {
                     <FormItem className="flex flex-col justify-start md:col-span-2 xl:col-span-6">
                         <FormLabel>
                             Subáreas
+                            <span className="text-xs">
+                                {field?.value ? ` (${field.value.length})` : ''}
+                            </span>
                             <FormRequiredIndicator formSchema={projetoSchema} />
                         </FormLabel>
                         <FormControl>
