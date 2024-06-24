@@ -69,6 +69,7 @@ export type Pesquisador = {
 }
 
 export type AgenciaFomento = {
+    id: number;
     nome: string;
     sigla: string;
 }

@@ -21,6 +21,7 @@ export function FormProjeto() {
             area: '',
             subareas: [],
             pesquisadorProjeto: [],
+            agenciasFomentoIds: [],
             // producoesAcademicas: [],
             // valoresArrecadados: [],
         },

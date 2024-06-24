@@ -38,7 +38,7 @@ export const projetoSchema = z.object({
         cargo: z.string().min(1),
         horas: z.number().min(1),
     }).required()).optional(),
-    agencias_fomento_ids : z.array(z.string().min(1)).optional(),
+    agenciasFomentoIds : z.array(z.string().min(1)).optional(),
     // producoesAcademicas: z.array(z.object({
     //     titulo: z.string().min(1).max(255),
     //     descicao: z.string().max(400),
