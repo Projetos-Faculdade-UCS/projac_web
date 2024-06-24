@@ -1,4 +1,5 @@
 import { Pesquisador } from '@/shared/lib/types';
+import { cn } from '@/shared/lib/utils';
 import { Avatar, AvatarImage } from '@/shared/ui/avatar';
 import {
     Select,
@@ -13,9 +14,14 @@ import { getPesquisadores } from '../../api/server';
 type SelectPesquisadorProps = {
     value: string;
     onChange: (value: string) => void;
+    className?: string;
 };
 
-export function SelectPesquisador({ value, onChange }: SelectPesquisadorProps) {
+export function SelectPesquisador({
+    value,
+    onChange,
+    className,
+}: SelectPesquisadorProps) {
     const [pesquisadores, setPesquisadores] = useState<Pesquisador[]>([]);
 
     useEffect(() => {
@@ -26,7 +32,7 @@ export function SelectPesquisador({ value, onChange }: SelectPesquisadorProps) {
 
     return (
         <Select onValueChange={onChange} defaultValue={value}>
-            <SelectTrigger>
+            <SelectTrigger className={cn('', className)}>
                 <SelectValue placeholder="Selecione um pesquisador" />
             </SelectTrigger>
             <SelectContent>

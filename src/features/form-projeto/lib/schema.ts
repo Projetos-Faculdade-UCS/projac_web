@@ -39,16 +39,18 @@ export const projetoSchema = z.object({
         horas: z.number().min(1),
     }).required()).optional(),
     agenciasFomentoIds : z.array(z.string().min(1)).optional(),
-    // producoesAcademicas: z.array(z.object({
-    //     titulo: z.string().min(1).max(255),
-    //     descicao: z.string().max(400),
-    //     tipo: z.string().max(255),
-    // })),
-    // valoresArrecadados: z.array(z.object({
-    //     valor: z.number().min(0).max(11),
-    //     descricao: z.string().min(1).max(400),
-    //     data: z.string(),
-    // })),
+    producoesAcademicas: z.array(z.object({
+        id: z.string().min(1),
+        titulo: z.string().min(1).max(255),
+        descicao: z.string().max(400),
+        tipo: z.string().max(255),
+    })).optional(),
+    valoresArrecadados: z.array(z.object({
+        id: z.string().min(1),
+        valor: z.number().min(0).max(11),
+        descricao: z.string().min(1).max(400),
+        data: z.string(),
+    })).optional(),
 })
 
 export type ProjetoSchema = z.infer<typeof projetoSchema>

@@ -2,13 +2,12 @@ import {
     FormControl,
     FormField,
     FormItem,
-    FormLabel,
     FormMessage,
-    FormRequiredIndicator,
 } from '@/shared/ui/form';
 import { Control } from 'react-hook-form';
-import { ProjetoSchema, projetoSchema } from '../../lib/schema';
-import { DatePickerInput } from '../custom-inputs/date-picker';
+import { ProjetoSchema } from '../../lib/schema';
+import { FormsetProducao } from '../formsets/formset-producao';
+import { FormsetValorArrecadado } from '../formsets/formset-valor-arrecadado';
 
 type ResultadosProps = {
     control: Control<ProjetoSchema>;
@@ -16,22 +15,26 @@ type ResultadosProps = {
 
 export function Resultados({ control }: ResultadosProps) {
     return (
-        <div className="grid gap-4 md:grid-cols-4 xl:col-span-4">
-            {' '}
-            <span className="text-lg font-medium xl:col-span-4">
-                Resultados
-            </span>
+        <div className="grid gap-4 md:grid-cols-4 xl:grid-cols-12">
             <FormField
                 control={control}
-                name="dataConclusao"
+                name="producoesAcademicas"
                 render={({ field }) => (
-                    <FormItem className="flex flex-col justify-center xl:col-span-1">
-                        <FormLabel>
-                            Data de conclusão
-                            <FormRequiredIndicator formSchema={projetoSchema} />
-                        </FormLabel>
+                    <FormItem className="md:col-span-4 xl:col-span-6">
                         <FormControl>
-                            <DatePickerInput {...field} />
+                            <FormsetProducao {...field} />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                )}
+            />
+            <FormField
+                control={control}
+                name="valoresArrecadados"
+                render={({ field }) => (
+                    <FormItem className="md:col-span-4 xl:col-span-6">
+                        <FormControl>
+                            <FormsetValorArrecadado {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>

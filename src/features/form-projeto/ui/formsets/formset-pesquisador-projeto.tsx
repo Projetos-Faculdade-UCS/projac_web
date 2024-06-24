@@ -6,7 +6,7 @@ import { ElementRef, forwardRef } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import { ProjetoSchema } from '../../lib/schema';
-import { FormPesquisadorProjeto } from './form-pesquisador-projeto';
+import { FormPesquisadorProjeto } from '../custom-inputs/form-pesquisador-projeto';
 
 type FormsetPesquisadoresProps = ControllerRenderProps<
     ProjetoSchema,
@@ -43,9 +43,10 @@ const FormsetPesquisadorProjeto = forwardRef<
                     variant={'link'}
                     onClick={handleChange}
                     type="button"
+                    className="h-auto py-0"
                     ref={ref}
                 >
-                    <IonIcon name="add-outline" className="text-lg" />
+                    <IonIcon name="add-outline" className="flex text-lg" />
                 </Button>
             </div>
             <div className="flex flex-col gap-4">

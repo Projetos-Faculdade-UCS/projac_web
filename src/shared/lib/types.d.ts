@@ -27,10 +27,10 @@ export type Projeto = {
 }
 
 export type ProducaoAcademica = {
-    id: number;
+    id: string;
     titulo: string;
     tipo: string;
-    descricao: string;
+    descricao?: string;
 }
 
 export type Area = {
@@ -41,7 +41,7 @@ export type Area = {
 }
 
 export type ValorArrecadado = {
-    id: number;
+    id: string;
     valor: number;
     data: string;
     descricao: string;

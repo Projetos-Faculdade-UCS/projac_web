@@ -11,6 +11,7 @@ import { Textarea } from '@/shared/ui/textarea';
 import { Control } from 'react-hook-form';
 import { ProjetoSchema, projetoSchema } from '../../lib/schema';
 import { CurrencyInput } from '../custom-inputs/currency';
+import { DatePickerInput } from '../custom-inputs/date-picker';
 import { MultiSelectSubaria } from '../custom-inputs/multi-select-subarea';
 import { SelectArea } from '../custom-inputs/select-area';
 
@@ -133,6 +134,22 @@ export function InfosGerais({ control }: InfoGeraisProps) {
                                 placeholder="R$ 0,00"
                                 className="text-base sm:text-sm"
                             />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                )}
+            />
+            <FormField
+                control={control}
+                name="dataConclusao"
+                render={({ field }) => (
+                    <FormItem className="flex flex-col justify-start xl:col-span-3">
+                        <FormLabel>
+                            Data de conclusão
+                            <FormRequiredIndicator formSchema={projetoSchema} />
+                        </FormLabel>
+                        <FormControl>
+                            <DatePickerInput {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>

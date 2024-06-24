@@ -2,12 +2,13 @@ import {
     FormControl,
     FormField,
     FormItem,
+    FormLabel,
     FormMessage,
 } from '@/shared/ui/form';
 import { Control } from 'react-hook-form';
 import { ProjetoSchema } from '../../lib/schema';
-import { FormsetPesquisadorProjeto } from '../custom-inputs/formset-pesquisador-projeto';
 import { MultiSelectFomentadores } from '../custom-inputs/multi-select-fomentadores';
+import { FormsetPesquisadorProjeto } from '../formsets/formset-pesquisador-projeto';
 
 type ParticipantesProps = {
     control: Control<ProjetoSchema>;
@@ -33,6 +34,12 @@ export function Participantes({ control }: ParticipantesProps) {
                 name={'agenciasFomentoIds'}
                 render={({ field }) => (
                     <FormItem className="md:col-span-4 xl:col-span-5">
+                        <FormLabel>
+                            Agências de fomento
+                            <span className="ml-1 text-xs">
+                                ({field.value?.length || 0})
+                            </span>
+                        </FormLabel>
                         <FormControl>
                             <MultiSelectFomentadores {...field} />
                         </FormControl>
