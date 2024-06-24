@@ -28,7 +28,7 @@ export function SideBarPronta() {
                             height={35}
                         />
                         <span className="text-xl font-semibold text-white">
-                            Projac
+                            Acadion
                         </span>
                     </Link>
                 </SidebarTrigger>

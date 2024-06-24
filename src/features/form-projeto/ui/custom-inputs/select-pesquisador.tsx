@@ -1,4 +1,5 @@
 import { Pesquisador } from '@/shared/lib/types';
+import { Avatar, AvatarImage } from '@/shared/ui/avatar';
 import {
     Select,
     SelectContent,
@@ -34,7 +35,17 @@ export function SelectPesquisador({ value, onChange }: SelectPesquisadorProps) {
                         key={pesquisador.id}
                         value={String(pesquisador.id)}
                     >
-                        {pesquisador.nome}
+                        <div className="flex items-center gap-2">
+                            <Avatar className="h-[1.125rem] w-[1.125rem]">
+                                <AvatarImage
+                                    src={pesquisador.fotoPerfil}
+                                    alt={`Foto do pesquisador ${pesquisador.nome}`}
+                                    width={100}
+                                    height={100}
+                                />
+                            </Avatar>
+                            {pesquisador.nome}
+                        </div>
                     </SelectItem>
                 ))}
             </SelectContent>

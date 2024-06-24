@@ -34,6 +34,6 @@ export default function RootLayout({
 }
 
 export const metadata: Metadata = {
-    title: 'Projac',
+    title: 'Acadion',
     description: 'Sistema de projetos acadêmicos',
 };
