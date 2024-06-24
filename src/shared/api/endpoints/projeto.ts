@@ -1,3 +1,4 @@
+import { ProjetoSchema } from "@/features/form-projeto/lib/schema";
 import { Projeto, ProjetoResumido } from "../../lib/types";
 import { BaseApiManager } from "../api-manager";
 
@@ -29,9 +30,10 @@ export class ProjetoApi extends BaseApiManager {
 
         return response.data;
     }
-    public async criarProjeto(projeto: Projeto) {
+    public async criarProjeto(projeto: ProjetoSchema) {
         const api = this.getApi();
-        const response = await api.post<Projeto>('/projetos', projeto);
+        const response = await api.post<Projeto>('/projetos/', projeto);
+        this.clearCache();
         return response.data;
     }
 }

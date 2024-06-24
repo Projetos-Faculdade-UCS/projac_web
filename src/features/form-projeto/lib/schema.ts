@@ -1,9 +1,12 @@
 "use client"
+import { format } from 'date-fns';
 import i18next from 'i18next';
 import { z } from "zod";
 import { zodI18nMap } from 'zod-i18n-map';
 import translation from 'zod-i18n-map/locales/pt/zod.json';
- 
+
+// Custom transformer to format the date
+const formatDate = (date: Date) => format(date, 'yyyy-MM-dd');
 
 /** 
  * definindo a linguagem da engine de validação dos formulários
@@ -29,9 +32,10 @@ export const projetoSchema = z.object({
     , {
         message: "Valor deve ser menor que 11 dígitos"
     }),
-    dataConclusao: z.date().optional(),
-    area: z.string().min(1, { message: "Selecione uma área" }),
-    subareas: z.array(z.string().min(1)).optional(),
+    dataCriacao: z.date().transform(date => formatDate(date)),
+    dataConclusao: z.date().transform(date => formatDate(date)).optional(),
+    areaId: z.string().min(1, { message: "Selecione uma área" }),
+    subareaIds: z.array(z.string().min(1)).optional(),
     pesquisadorProjeto: z.array(z.object({
         id: z.string().min(1),
         pesquisador_id: z.string().min(1),
@@ -49,7 +53,7 @@ export const projetoSchema = z.object({
         id: z.string().min(1),
         valor: z.number().min(0).max(11),
         descricao: z.string().min(1).max(400),
-        data: z.string(),
+        data: z.date().transform(date => formatDate(date)),
     })).optional(),
 })
 

@@ -44,12 +44,12 @@ export function FormProducao({
                         <SelectValue placeholder="Selecione um tipo" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="artigo">Artigo</SelectItem>
-                        <SelectItem value="livro">Livro</SelectItem>
-                        <SelectItem value="capitulo">Capítulo</SelectItem>
-                        <SelectItem value="patente">Patente</SelectItem>
-                        <SelectItem value="software">Software</SelectItem>
-                        <SelectItem value="outro">Outro</SelectItem>
+                        <SelectItem value="ARTIGO">Artigo</SelectItem>
+                        <SelectItem value="LIVRO">Livro</SelectItem>
+                        <SelectItem value="CAPITULO">Capítulo</SelectItem>
+                        <SelectItem value="PATENTE">Patente</SelectItem>
+                        <SelectItem value="SOFTWARE">Software</SelectItem>
+                        <SelectItem value="OUTRO">Outro</SelectItem>
                     </SelectContent>
                 </Select>
                 <Textarea

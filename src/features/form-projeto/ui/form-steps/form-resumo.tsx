@@ -1,3 +1,5 @@
+import { Button } from '@/shared/ui/button';
+import { IonIcon } from '@/shared/ui/ion-icon';
 import { ScrollArea } from '@/shared/ui/scroll-area';
 import { useStepper } from '@/shared/ui/stepper';
 import { useEffect, useState } from 'react';
@@ -24,6 +26,14 @@ export function FormResumo() {
                     </code>
                 </pre>
             </ScrollArea>
+            <Button
+                type="button"
+                variant={'outline'}
+                onClick={() => console.log(values)}
+            >
+                Copy to console
+                <IonIcon name="copy-outline" />
+            </Button>
         </div>
     );
 }

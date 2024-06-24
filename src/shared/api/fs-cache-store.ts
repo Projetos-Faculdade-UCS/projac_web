@@ -24,9 +24,14 @@ const getCacheInstance = () => {
     return cacheInstance;
 };
 
+type CustomFileStorage = ReturnType<typeof buildStorage> & {
+    clear?: () => Promise<void>;
+};
+
 // Implementação customizada de armazenamento de cache em disco
-export const customFileStorage = buildStorage({
+export const customFileStorage: CustomFileStorage = buildStorage({
     async set(key: string, value: NotEmptyStorageValue, currentRequest?: CacheRequestConfig): Promise<void> {
+        console.log('Setting cache:', key, currentRequest)
         try {
             const cache = getCacheInstance();
             await cache.set(key, value);
@@ -52,4 +57,13 @@ export const customFileStorage = buildStorage({
             return undefined;
         }
     }
-});
+})
+
+customFileStorage.clear = async () => {
+    try {
+        const cache = getCacheInstance();
+        await cache.clear();
+    } catch (error) {
+        console.error('Error clearing cache:', error);
+    }
+}

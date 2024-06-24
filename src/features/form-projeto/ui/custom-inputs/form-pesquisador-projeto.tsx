@@ -42,12 +42,12 @@ export function FormPesquisadorProjeto({
                         <SelectValue placeholder="Selecione um cargo" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="coordernador">
+                        <SelectItem value="COORDENADOR">
                             Coordernador
                         </SelectItem>
-                        <SelectItem value="pesquisador">Pesquisador</SelectItem>
-                        <SelectItem value="colaborador">Colaborador</SelectItem>
-                        <SelectItem value="estagiario">Estagiário</SelectItem>
+                        <SelectItem value="PESQUISADOR">Pesquisador</SelectItem>
+                        <SelectItem value="COLABORADOR">Colaborador</SelectItem>
+                        <SelectItem value="ESTAGIARIO">Estagiário</SelectItem>
                     </SelectContent>
                 </Select>
                 <Input

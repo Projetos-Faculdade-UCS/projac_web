@@ -3,7 +3,9 @@
 import { AreaApi } from "@/shared/api/endpoints/area";
 import { FomentadorApi } from "@/shared/api/endpoints/fomentador";
 import { PesquisadorApi } from "@/shared/api/endpoints/pesquisador";
+import { ProjetoApi } from "@/shared/api/endpoints/projeto";
 import { SubareaApi } from "@/shared/api/endpoints/subarea";
+import { ProjetoSchema } from "../lib/schema";
 
 
 export async function getAreas(){
@@ -20,4 +22,9 @@ export async function getPesquisadores(){
 
 export async function getFomentadores(){
     return FomentadorApi.getInstance().getFomentadores()
+}
+
+export async function createProjeto(data: ProjetoSchema){
+    console.table(data)
+    return ProjetoApi.getInstance().criarProjeto(data)
 }

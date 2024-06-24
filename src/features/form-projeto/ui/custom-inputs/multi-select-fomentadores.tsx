@@ -38,10 +38,10 @@ const MultiSelectFomentadores = forwardRef<
                 onChange={handleChange}
                 {...props}
             >
-                {fomentadores.map((fomentador) => (
+                {fomentadores.map((fomentador, index) => (
                     <option
-                        key={fomentador.id}
-                        value={fomentador.id.toString()}
+                        key={fomentador.id || index}
+                        value={fomentador.id?.toString() || index}
                     >
                         {fomentador.sigla}
                     </option>
