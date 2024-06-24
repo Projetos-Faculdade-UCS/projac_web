@@ -1,10 +1,10 @@
-import { Pesquisador } from '@/shared/lib/types';
+import { PesquisadorProjeto } from '@/shared/lib/types';
 import { Avatar, AvatarImage } from '@/shared/ui/avatar';
 import { IonIcon } from '@/shared/ui/ion-icon';
 import Link from 'next/link';
 
 type PesquisadoresTabProps = {
-    pesquisadores: Pesquisador[];
+    pesquisadores: PesquisadorProjeto[];
 };
 
 export function PesquisadoresTab({ pesquisadores }: PesquisadoresTabProps) {

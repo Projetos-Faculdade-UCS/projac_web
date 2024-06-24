@@ -15,7 +15,7 @@ export type Projeto = {
     producoesAcademicas: ProducaoAcademica[];
     valoresArrecadados: ValorArrecadado[];
     subareas: Subarea[];
-    pesquisadores: Pesquisador[];
+    pesquisadores: PesquisadorProjeto[];
     agenciasFomento: AgenciaFomento[];
 }
 
@@ -46,13 +46,22 @@ export type Subarea = {
     cor: string;
 }
 
-export type Pesquisador = {
+export type PesquisadorProjeto = {
     id: number;
     nome: string;
     sobrenome: string;
     cargo: string;
     horas: number;
     fotoPerfil: string;
+}
+
+export type Pesquisador = {
+    id: number;
+    nome: string;
+    sobrenome: string;
+    fotoPerfil: string;
+    numeroProjetos: number;
+    numeroProducoes: number;
 }
 
 export type AgenciaFomento = {

@@ -20,6 +20,13 @@ export function FormProjeto() {
             valorSolicitado: 0,
             area: '',
             subareas: [],
+            pesquisadores: [
+                {
+                    pesquisador: '',
+                    cargo: '',
+                    horas: 0,
+                },
+            ],
             // producoesAcademicas: [],
             // valoresArrecadados: [],
         },
