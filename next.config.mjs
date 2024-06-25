@@ -3,9 +3,9 @@ const nextConfig = {
     env: {
         apiUrl: process.env.API_URL,
         apiKey: process.env.API_KEY,
-        cacheTime: process.env.CACHE_TIME,
         apiKeyHeader: process.env.API_KEY_HEADER,
         apiKeyPrefix: process.env.API_KEY_PREFIX,
+        useCache: process.env.USE_CACHE,
     },
     images: {
         remotePatterns: [

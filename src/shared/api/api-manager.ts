@@ -15,8 +15,7 @@ export abstract class BaseApiManager {
     private apiKey = nextConfig?.env?.apiKey;
     private apiPrefix = nextConfig?.env?.apiKeyPrefix || '';
     private apiHeader = nextConfig?.env?.apiKeyHeader || '';
-
-    private cacheTime = nextConfig?.env?.cacheTime === undefined ? CACHE_TIME : Number(nextConfig.env.cacheTime);
+    private useCache = (nextConfig?.env?.useCache === 'true') || false;
 
     protected constructor() {
         if (!this.apiUrl || !this.apiKey) {
@@ -31,14 +30,16 @@ export abstract class BaseApiManager {
             },
             timeout: 10000,
         });
-
+        
+        
         this.api = setupCache(instance, {
-            storage: customFileStorage,
+            storage: this.useCache ? customFileStorage : undefined,
             methods: ['get'],
             headerInterpreter: () => {
-                return this.cacheTime;
+                return CACHE_TIME
             }
         });
+        
     }
 
     protected getApi(): AxiosCacheInstance {

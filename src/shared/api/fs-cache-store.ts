@@ -31,7 +31,6 @@ type CustomFileStorage = ReturnType<typeof buildStorage> & {
 // Implementação customizada de armazenamento de cache em disco
 export const customFileStorage: CustomFileStorage = buildStorage({
     async set(key: string, value: NotEmptyStorageValue, currentRequest?: CacheRequestConfig): Promise<void> {
-        console.log('Setting cache:', key, currentRequest)
         try {
             const cache = getCacheInstance();
             await cache.set(key, value);
