@@ -7,7 +7,7 @@ import {
 } from '@/shared/ui/form';
 import { Control } from 'react-hook-form';
 import { ProjetoSchema } from '../../lib/schema';
-import { MultiSelectFomentadores } from '../custom-inputs/multi-select-fomentadores';
+import { MultiSelectFomentador } from '../custom-inputs/multi-select-fomentador';
 import { FormsetPesquisadorProjeto } from '../formsets/formset-pesquisador-projeto';
 
 type ParticipantesProps = {
@@ -41,7 +41,7 @@ export function Participantes({ control }: ParticipantesProps) {
                             </span>
                         </FormLabel>
                         <FormControl>
-                            <MultiSelectFomentadores {...field} />
+                            <MultiSelectFomentador {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>

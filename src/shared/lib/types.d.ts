@@ -54,7 +54,7 @@ export type Subarea = {
 }
 
 export type PesquisadorProjeto = {
-    pesquisador_id: string;
+    pesquisadorId: string;
     cargo: string;
     horas: number;
 }
@@ -91,4 +91,21 @@ export type ProjetoResumido = {
         fotoPerfil: string;
     };
 
+}
+
+type ProjetoApiErrors =  {
+    titulo?: string[];
+    objetivo?: string[];
+    descricao?: string[];
+    valorSolicitado?: string[];
+    dataCriacao?: string[];
+    dataConclusao?: string[];
+    areaId?: string[];
+    subareaIds?: string[];
+    pesquisadorProjeto?: {
+        id?: string[];
+        pesquisadorId?: string[];
+        cargo?: string[];
+        horas?: string[];
+    }[];
 }

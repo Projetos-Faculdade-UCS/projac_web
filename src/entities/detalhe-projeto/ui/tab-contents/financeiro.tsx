@@ -1,6 +1,7 @@
 import { ValorArrecadado } from '@/shared/lib/types';
 import { IonIcon } from '@/shared/ui/ion-icon';
 import { ScrollArea } from '@/shared/ui/scroll-area';
+import { number2Currency } from '../../lib/utils';
 
 type FinanceiroTabProps = {
     valorSolicitado: number;
@@ -32,7 +33,7 @@ export function FinanceiroTab({
                                 R$
                             </span>
                             <span className="text-lg">
-                                {valorSolicitado.toFixed(2).replace('.', ',')}
+                                {number2Currency(valorSolicitado)}
                             </span>
                         </div>
                     </div>
@@ -53,7 +54,7 @@ export function FinanceiroTab({
                                 R$
                             </span>
                             <span className="text-lg">
-                                {totalArrecadado.toFixed(2).replace('.', ',')}
+                                {number2Currency(totalArrecadado)}
                             </span>
                         </div>
                     </div>
@@ -87,9 +88,9 @@ export function FinanceiroTab({
                                                     R$
                                                 </span>
                                                 <span className="text-lg">
-                                                    {valorArrecadado.valor
-                                                        .toFixed(2)
-                                                        .replace('.', ',')}
+                                                    {number2Currency(
+                                                        valorArrecadado.valor,
+                                                    )}
                                                 </span>
                                             </div>
                                             <span className="text-xs text-muted-foreground">

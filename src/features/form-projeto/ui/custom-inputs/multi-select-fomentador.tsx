@@ -9,7 +9,7 @@ type MultiSelectFomentadoresProps = ControllerRenderProps<
     'agenciasFomentoIds'
 >;
 
-const MultiSelectFomentadores = forwardRef<
+const MultiSelectFomentador = forwardRef<
     HTMLSelectElement,
     Omit<MultiSelectFomentadoresProps, 'ref'>
 >(({ onChange, value, ...props }, ref) => {
@@ -38,10 +38,10 @@ const MultiSelectFomentadores = forwardRef<
                 onChange={handleChange}
                 {...props}
             >
-                {fomentadores.map((fomentador, index) => (
+                {fomentadores.map((fomentador) => (
                     <option
-                        key={fomentador.id || index}
-                        value={fomentador.id?.toString() || index}
+                        key={fomentador.id}
+                        value={fomentador.id?.toString()}
                     >
                         {fomentador.sigla}
                     </option>
@@ -51,6 +51,6 @@ const MultiSelectFomentadores = forwardRef<
     );
 });
 
-MultiSelectFomentadores.displayName = 'MultiSelectFomentadores';
+MultiSelectFomentador.displayName = 'MultiSelectFomentador';
 
-export { MultiSelectFomentadores };
+export { MultiSelectFomentador };

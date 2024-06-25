@@ -3,6 +3,7 @@ import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { IonIcon } from '@/shared/ui/ion-icon';
 import { ChangeEvent } from 'react';
+import { CurrencyInput } from './currency';
 import { DatePickerInput } from './date-picker';
 
 type FormValorArrecadadoProps = {
@@ -37,15 +38,16 @@ export function FormValorArrecadado({
                     name={`data-${value.id}`}
                     onBlur={() => {}}
                 />
-                <Input
+                <CurrencyInput
                     className="md:col-span-3 xl:col-span-3"
                     value={value.valor}
-                    placeholder="0"
-                    type="number"
-                    onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    placeholder="R$ 0,00"
+                    name={`valor-${value.id}`}
+                    onBlur={() => {}}
+                    onChange={(valorSolicitado) =>
                         onChange({
                             ...value,
-                            valor: event.target.valueAsNumber,
+                            valor: valorSolicitado,
                         })
                     }
                 />

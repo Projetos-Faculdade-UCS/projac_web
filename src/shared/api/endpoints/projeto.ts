@@ -18,14 +18,14 @@ export class ProjetoApi extends BaseApiManager {
 
     public async getProjetos() {
         const api = this.getApi();
-        const response = await api.get<ProjetoResumido[]>(`/projetos`);
+        const response = await api.get<ProjetoResumido[]>(`/projetos/`);
         return response.data;
     }
 
     public async getProjeto(idProjeto: string) {
         const api = this.getApi();
         const response = await api.get<Projeto>(
-            `/projetos/${idProjeto}`
+            `/projetos/${idProjeto}/`
         );
 
         return response.data;
@@ -33,6 +33,13 @@ export class ProjetoApi extends BaseApiManager {
     public async criarProjeto(projeto: ProjetoSchema) {
         const api = this.getApi();
         const response = await api.post<Projeto>('/projetos/', projeto);
+        this.clearCache();
+        return response;
+    }
+
+    public async deletarProjeto(idProjeto: string) {
+        const api = this.getApi();
+        const response = await api.delete(`/projetos/${idProjeto}/`);
         this.clearCache();
         return response.data;
     }

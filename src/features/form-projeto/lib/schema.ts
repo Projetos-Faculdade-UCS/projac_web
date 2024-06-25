@@ -38,7 +38,7 @@ export const projetoSchema = z.object({
     subareaIds: z.array(z.string().min(1)).optional(),
     pesquisadorProjeto: z.array(z.object({
         id: z.string().min(1),
-        pesquisador_id: z.string().min(1),
+        pesquisadorId: z.string().min(1),
         cargo: z.string().min(1),
         horas: z.number().min(1),
     }).required()).optional(),
@@ -46,12 +46,19 @@ export const projetoSchema = z.object({
     producoesAcademicas: z.array(z.object({
         id: z.string().min(1),
         titulo: z.string().min(1).max(255),
-        descicao: z.string().max(400),
+        descricao: z.string().max(400),
         tipo: z.string().max(255),
     })).optional(),
     valoresArrecadados: z.array(z.object({
         id: z.string().min(1),
-        valor: z.number().min(0).max(11),
+        valor: z.number().gt(0, {message: 
+            "Valor deve ser maior que 0"
+        }).refine((value) => {
+            return value.toString().length < 11
+        }
+        , {
+            message: "Valor deve ser menor que 11 dígitos"
+        }),
         descricao: z.string().min(1).max(400),
         data: z.date().transform(date => formatDate(date)),
     })).optional(),

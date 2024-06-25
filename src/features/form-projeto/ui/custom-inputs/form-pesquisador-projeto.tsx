@@ -28,26 +28,27 @@ export function FormPesquisadorProjeto({
             <div className="grid grid-cols-1 gap-2 md:grid-cols-3 xl:grid-cols-6">
                 <SelectPesquisador
                     className="md:col-span-3"
-                    onChange={(pesquisador_id) =>
-                        onChange({ ...pesquisadorProjeto, pesquisador_id })
+                    onChange={(pesquisadorId) =>
+                        onChange({ ...pesquisadorProjeto, pesquisadorId })
                     }
-                    value={pesquisadorProjeto.pesquisador_id}
+                    value={pesquisadorProjeto.pesquisadorId}
                 />
                 <Select
                     onValueChange={(cargo) =>
                         onChange({ ...pesquisadorProjeto, cargo })
                     }
+                    defaultValue={pesquisadorProjeto.cargo}
                 >
                     <SelectTrigger className="md:col-span-2">
                         <SelectValue placeholder="Selecione um cargo" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="COORDENADOR">
+                        <SelectItem value="coordenador">
                             Coordernador
                         </SelectItem>
-                        <SelectItem value="PESQUISADOR">Pesquisador</SelectItem>
-                        <SelectItem value="COLABORADOR">Colaborador</SelectItem>
-                        <SelectItem value="ESTAGIARIO">Estagiário</SelectItem>
+                        <SelectItem value="pesquisador">Pesquisador</SelectItem>
+                        <SelectItem value="colaborador">Colaborador</SelectItem>
+                        <SelectItem value="estagiario">Estagiário</SelectItem>
                     </SelectContent>
                 </Select>
                 <Input

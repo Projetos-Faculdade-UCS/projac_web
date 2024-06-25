@@ -39,6 +39,7 @@ export function FormProducao({
                 />
                 <Select
                     onValueChange={(tipo) => onChange({ ...producao, tipo })}
+                    defaultValue={producao.tipo}
                 >
                     <SelectTrigger className="md:col-span-2">
                         <SelectValue placeholder="Selecione um tipo" />

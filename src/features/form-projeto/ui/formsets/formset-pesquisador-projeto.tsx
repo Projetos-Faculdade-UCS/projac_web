@@ -21,7 +21,7 @@ const FormsetPesquisadorProjeto = forwardRef<
         event.preventDefault();
         const newPesquisadorProjeto = {
             id: uuidv4(),
-            pesquisador_id: '',
+            pesquisadorId: '',
             cargo: '',
             horas: 0,
         };
