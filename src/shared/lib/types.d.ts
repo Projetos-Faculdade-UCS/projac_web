@@ -15,15 +15,22 @@ export type Projeto = {
     producoesAcademicas: ProducaoAcademica[];
     valoresArrecadados: ValorArrecadado[];
     subareas: Subarea[];
-    pesquisadores: Pesquisador[];
+    pesquisadores: {
+        id: number;
+        nome: string;
+        sobrenome: string;
+        cargo: string;
+        horas: number;
+        fotoPerfil: string;
+    }[];
     agenciasFomento: AgenciaFomento[];
 }
 
 export type ProducaoAcademica = {
-    id: number;
+    id: string;
     titulo: string;
     tipo: string;
-    descricao: string;
+    descricao?: string;
 }
 
 export type Area = {
@@ -34,7 +41,7 @@ export type Area = {
 }
 
 export type ValorArrecadado = {
-    id: number;
+    id: string;
     valor: number;
     data: string;
     descricao: string;
@@ -46,16 +53,23 @@ export type Subarea = {
     cor: string;
 }
 
+export type PesquisadorProjeto = {
+    pesquisadorId: string;
+    cargo: string;
+    horas: number;
+}
+
 export type Pesquisador = {
     id: number;
     nome: string;
     sobrenome: string;
-    cargo: string;
-    horas: number;
     fotoPerfil: string;
+    numeroProjetos: number;
+    numeroProducoes: number;
 }
 
 export type AgenciaFomento = {
+    id: number;
     nome: string;
     sigla: string;
 }
@@ -77,4 +91,21 @@ export type ProjetoResumido = {
         fotoPerfil: string;
     };
 
+}
+
+type ProjetoApiErrors =  {
+    titulo?: string[];
+    objetivo?: string[];
+    descricao?: string[];
+    valorSolicitado?: string[];
+    dataCriacao?: string[];
+    dataConclusao?: string[];
+    areaId?: string[];
+    subareaIds?: string[];
+    pesquisadorProjeto?: {
+        id?: string[];
+        pesquisadorId?: string[];
+        cargo?: string[];
+        horas?: string[];
+    }[];
 }

@@ -10,7 +10,7 @@ import { ProjetoSchema } from '../../lib/schema';
 
 type MultiSelectSubariaProps = ControllerRenderProps<
     ProjetoSchema,
-    'subareas'
+    'subareaIds'
 > & {
     className?: string;
 };

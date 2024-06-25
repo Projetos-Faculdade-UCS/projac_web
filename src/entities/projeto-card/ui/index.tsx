@@ -28,7 +28,9 @@ export function ProjetoCard({ projeto }: ProjetoCardProps) {
                 }}
             >
                 <CardHeader className="relative pb-3">
-                    <CardTitle className="text-xl">{projeto.titulo}</CardTitle>
+                    <CardTitle className="truncate text-xl">
+                        {projeto.titulo}
+                    </CardTitle>
                     <div className="absolute right-0 top-0 flex items-start justify-end pr-2 pt-2">
                         <div
                             className="paper-flip border-l-[3.5rem] border-t-[3.5rem] opacity-20"
@@ -81,7 +83,7 @@ export function ProjetoCard({ projeto }: ProjetoCardProps) {
                         <span className="text-nowrap text-[.625rem] text-muted-foreground sm:text-xs">
                             {formatDateToTimeAgo(projeto.dataCriacao)}
                         </span>
-                        <MenuCard />
+                        <MenuCard projetoId={projeto.id} />
                     </div>
                 </CardFooter>
             </Card>

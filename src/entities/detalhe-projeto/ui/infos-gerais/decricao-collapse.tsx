@@ -1,5 +1,6 @@
 'use client';
 import { Button } from '@/shared/ui/button';
+import { TextWithLineBreaks } from '@/shared/ui/text-with-line-breaks';
 import { useState } from 'react';
 import styles from './descricao-collapse.module.scss';
 
@@ -21,7 +22,7 @@ export function DescricaoCollapse({ descricao }: DescricaoCollapseProps) {
                 }
                 className={`${styles.truncate} overflow-hidden`}
             >
-                {descricao}
+                <TextWithLineBreaks text={descricao} />
             </div>
             {descGrande && (
                 <Button

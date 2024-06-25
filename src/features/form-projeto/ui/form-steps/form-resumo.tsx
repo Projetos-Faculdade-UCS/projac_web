@@ -1,3 +1,6 @@
+import { Button } from '@/shared/ui/button';
+import { IonIcon } from '@/shared/ui/ion-icon';
+import { ScrollArea } from '@/shared/ui/scroll-area';
 import { useStepper } from '@/shared/ui/stepper';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -16,11 +19,21 @@ export function FormResumo() {
 
     return (
         <div className="flex h-full flex-col gap-6">
-            <pre className="rounded-md bg-slate-950 p-4">
-                <code className="text-white">
-                    {JSON.stringify(values, null, 2)}
-                </code>
-            </pre>
+            <ScrollArea className="h-96 rounded-md bg-slate-950 p-4">
+                <pre>
+                    <code className="text-white">
+                        {JSON.stringify(values, null, 2)}
+                    </code>
+                </pre>
+            </ScrollArea>
+            <Button
+                type="button"
+                variant={'outline'}
+                onClick={() => console.log(values)}
+            >
+                Copy to console
+                <IonIcon name="copy-outline" />
+            </Button>
         </div>
     );
 }

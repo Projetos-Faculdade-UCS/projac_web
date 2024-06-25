@@ -2,10 +2,9 @@ import { cn } from '@/shared/lib/utils';
 import React from 'react';
 import * as CurrencyPrimitive from 'react-currency-input-field';
 import { ControllerRenderProps } from 'react-hook-form';
-import { ProjetoSchema } from '../../lib/schema';
 
 type CurrencyInputProps = CurrencyPrimitive.CurrencyInputProps &
-    ControllerRenderProps<ProjetoSchema, 'valorSolicitado'>;
+    ControllerRenderProps;
 
 const CurrencyInput = React.forwardRef<
     React.ElementRef<typeof CurrencyPrimitive.default>,

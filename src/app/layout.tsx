@@ -1,5 +1,6 @@
 import { SideBarPronta } from '@/entities/side-bar/ui/side-bar-pronta';
 import { poppins } from '@/shared/lib/fonts';
+import { Toaster } from '@/shared/ui/sonner';
 import { Metadata } from 'next';
 import Script from 'next/script';
 import './globals.css';
@@ -23,6 +24,7 @@ export default function RootLayout({
             >
                 <SideBarPronta />
                 {children}
+                <Toaster richColors position="top-right" />
                 <Script
                     type="module"
                     src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -34,6 +36,6 @@ export default function RootLayout({
 }
 
 export const metadata: Metadata = {
-    title: 'Projac',
+    title: 'Acadion',
     description: 'Sistema de projetos acadêmicos',
 };

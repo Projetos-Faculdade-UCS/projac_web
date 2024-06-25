@@ -1,9 +1,12 @@
 "use client"
+import { format } from 'date-fns';
 import i18next from 'i18next';
 import { z } from "zod";
 import { zodI18nMap } from 'zod-i18n-map';
 import translation from 'zod-i18n-map/locales/pt/zod.json';
- 
+
+// Custom transformer to format the date
+const formatDate = (date: Date) => format(date, 'yyyy-MM-dd');
 
 /** 
  * definindo a linguagem da engine de validação dos formulários
@@ -29,19 +32,36 @@ export const projetoSchema = z.object({
     , {
         message: "Valor deve ser menor que 11 dígitos"
     }),
-    dataConclusao: z.date().optional(),
-    area: z.string().min(1, { message: "Selecione uma área" }),
-    subareas: z.array(z.string().min(1)).optional(),
-    // producoesAcademicas: z.array(z.object({
-    //     titulo: z.string().min(1).max(255),
-    //     descicao: z.string().max(400),
-    //     tipo: z.string().max(255),
-    // })),
-    // valoresArrecadados: z.array(z.object({
-    //     valor: z.number().min(0).max(11),
-    //     descricao: z.string().min(1).max(400),
-    //     data: z.string(),
-    // })),
+    dataCriacao: z.date().transform(date => formatDate(date)),
+    dataConclusao: z.date().transform(date => formatDate(date)).optional(),
+    areaId: z.string().min(1, { message: "Selecione uma área" }),
+    subareaIds: z.array(z.string().min(1)).optional(),
+    pesquisadorProjeto: z.array(z.object({
+        id: z.string().min(1),
+        pesquisadorId: z.string().min(1),
+        cargo: z.string().min(1),
+        horas: z.number().min(1),
+    }).required()).optional(),
+    agenciasFomentoIds : z.array(z.string().min(1)).optional(),
+    producoesAcademicas: z.array(z.object({
+        id: z.string().min(1),
+        titulo: z.string().min(1).max(255),
+        descricao: z.string().max(400),
+        tipo: z.string().max(255),
+    })).optional(),
+    valoresArrecadados: z.array(z.object({
+        id: z.string().min(1),
+        valor: z.number().gt(0, {message: 
+            "Valor deve ser maior que 0"
+        }).refine((value) => {
+            return value.toString().length < 11
+        }
+        , {
+            message: "Valor deve ser menor que 11 dígitos"
+        }),
+        descricao: z.string().min(1).max(400),
+        data: z.date().transform(date => formatDate(date)),
+    })).optional(),
 })
 
 export type ProjetoSchema = z.infer<typeof projetoSchema>
