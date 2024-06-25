@@ -12,7 +12,7 @@ import { ControllerRenderProps } from 'react-hook-form';
 import { getAreas } from '../../api/server';
 import { ProjetoSchema } from '../../lib/schema';
 
-type SelectAreaProps = ControllerRenderProps<ProjetoSchema, 'area'>;
+type SelectAreaProps = ControllerRenderProps<ProjetoSchema, 'areaId'>;
 
 const SelectArea = React.forwardRef<
     HTMLSelectElement,

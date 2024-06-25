@@ -6,20 +6,25 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover';
 import { ptBR } from 'date-fns/locale';
 import React, { useState } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
-import { ProjetoSchema } from '../../lib/schema';
 import { dateToBrDate } from '../../lib/utils';
 
-type DatePickerProps = ControllerRenderProps<ProjetoSchema, 'dataConclusao'> & {
+type DatePickerProps = ControllerRenderProps & {
     disabledDates?: (date: Date) => boolean;
+    className?: string;
 };
 const DatePickerInput = React.forwardRef<
     HTMLButtonElement,
     Omit<DatePickerProps, 'ref'>
->(({ value, ...props }, ref) => {
+>(({ value, className, ...props }, ref) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <Popover open={isOpen} onOpenChange={setIsOpen}>
-            <div className="flex h-9 items-center rounded-md border border-input px-3 py-1 text-sm shadow-sm">
+            <div
+                className={cn(
+                    'flex h-9 items-center rounded-md border border-input px-3 py-1 text-sm shadow-sm',
+                    className,
+                )}
+            >
                 <PopoverTrigger asChild>
                     <button
                         ref={ref}
