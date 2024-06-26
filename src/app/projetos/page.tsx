@@ -38,3 +38,5 @@ export default function ListaProjetosPage() {
         </main>
     );
 }
+
+export const fetchCache = 'force-no-store';
