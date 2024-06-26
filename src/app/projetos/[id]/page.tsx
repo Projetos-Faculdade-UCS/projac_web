@@ -28,3 +28,5 @@ export default function ProjetoDetalhe({
         </main>
     );
 }
+
+export const fetchCache = 'force-no-store';

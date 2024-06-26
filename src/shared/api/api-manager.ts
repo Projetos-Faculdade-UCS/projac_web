@@ -10,7 +10,6 @@ export abstract class BaseApiManager {
     private apiKey = nextConfig?.env?.apiKey;
     private apiPrefix = nextConfig?.env?.apiKeyPrefix || '';
     private apiHeader = nextConfig?.env?.apiKeyHeader || '';
-    private useCache = (nextConfig?.env?.useCache === 'true') || false;
 
     protected constructor() {
         if (!this.apiUrl || !this.apiKey) {
