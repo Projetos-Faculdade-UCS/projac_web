@@ -1,5 +1,5 @@
 import { Area } from '../../lib/types';
-import { BaseApiManager } from '../api-manager';
+import { BaseApiManager } from '../api-manager-fetch';
 
 export class AreaApi extends BaseApiManager {
     private static instance: AreaApi;
@@ -16,8 +16,7 @@ export class AreaApi extends BaseApiManager {
     }
 
     public async getAreas() {
-        const api = this.getApi();
-        const response = await api.get<Area[]>(`/areas`);
-        return response.data;
+        const response = await this.get<Area[]>(`/areas`);
+        return response;
     }
 }

@@ -1,5 +1,5 @@
 import { Pesquisador } from "@/shared/lib/types";
-import { BaseApiManager } from "../api-manager";
+import { BaseApiManager } from "../api-manager-fetch";
 
 export class PesquisadorApi extends BaseApiManager {
     private static instance: PesquisadorApi;
@@ -16,8 +16,7 @@ export class PesquisadorApi extends BaseApiManager {
     }
 
     public async getPesquisadores() {
-        const api = this.getApi();
-        const response = await api.get<Pesquisador[]>(`/pesquisadores`);
-        return response.data;
+        const response = await this.get<Pesquisador[]>(`/pesquisadores`);
+        return response;
     }
 }

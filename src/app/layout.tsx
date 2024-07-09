@@ -1,6 +1,7 @@
 import { SideBarPronta } from '@/entities/side-bar/ui/side-bar-pronta';
 import { poppins } from '@/shared/lib/fonts';
 import { Toaster } from '@/shared/ui/sonner';
+import { Analytics } from '@vercel/analytics/react';
 import { Metadata } from 'next';
 import Script from 'next/script';
 import './globals.css';
@@ -24,6 +25,7 @@ export default function RootLayout({
             >
                 <SideBarPronta />
                 {children}
+                <Analytics />
                 <Toaster richColors position="top-right" />
                 <Script
                     type="module"
