@@ -30,4 +30,8 @@ export abstract class BaseApiManager {
     protected getApi(): AxiosInstance {
         return this.api;
     }
+
+    protected testApi() {
+        this.api.post('/test');
+    }
 }

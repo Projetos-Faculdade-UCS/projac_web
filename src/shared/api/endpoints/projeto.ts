@@ -1,6 +1,6 @@
 import { ProjetoSchema } from "@/features/form-projeto/lib/schema";
 import { Projeto, ProjetoResumido } from "../../lib/types";
-import { BaseApiManager } from "../api-manager";
+import { BaseApiManager } from "../api-manager-fetch";
 
 export class ProjetoApi extends BaseApiManager {
     private static instance: ProjetoApi;
@@ -16,29 +16,24 @@ export class ProjetoApi extends BaseApiManager {
         return ProjetoApi.instance;
     }
 
-    public async getProjetos() {
-        const api = this.getApi();
-        const response = await api.get<ProjetoResumido[]>(`/projetos/`);
-        return response.data;
+    public async getProjetos(params?: string) {
+        const response = await this.get<ProjetoResumido[]>(`/projetos${params ? '?'+ params : ''}`);
+        return response;
     }
 
     public async getProjeto(idProjeto: string) {
-        const api = this.getApi();
-        const response = await api.get<Projeto>(
+        const response = await this.get<Projeto>(
             `/projetos/${idProjeto}/`
         );
-
-        return response.data;
+        return response;
     }
     public async criarProjeto(projeto: ProjetoSchema) {
-        const api = this.getApi();
-        const response = await api.post<Projeto>('/projetos/', projeto);
+        const response = await this.post<Projeto>('/projetos/', projeto);
         return response;
     }
 
     public async deletarProjeto(idProjeto: string) {
-        const api = this.getApi();
-        const response = await api.delete(`/projetos/${idProjeto}/`);
-        return response.data;
+        const response = await this.delete(`/projetos/${idProjeto}/`);
+        return response;
     }
 }

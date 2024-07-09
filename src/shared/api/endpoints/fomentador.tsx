@@ -1,5 +1,5 @@
 import { AgenciaFomento } from '../../lib/types';
-import { BaseApiManager } from '../api-manager';
+import { BaseApiManager } from '../api-manager-fetch';
 
 export class FomentadorApi extends BaseApiManager {
     private static instance: FomentadorApi;
@@ -16,8 +16,7 @@ export class FomentadorApi extends BaseApiManager {
     }
 
     public async getFomentadores() {
-        const api = this.getApi();
-        const response = await api.get<AgenciaFomento[]>(`/agencias-fomento`);
-        return response.data;
+        const response = await this.get<AgenciaFomento[]>(`/agencias-fomento`);
+        return response;
     }
 }
