@@ -1,5 +1,5 @@
 import { Subarea } from '../../lib/types';
-import { BaseApiManager } from '../api-manager';
+import { BaseApiManager } from '../api-manager-fetch';
 
 export class SubareaApi extends BaseApiManager {
     private static instance: SubareaApi;
@@ -16,8 +16,7 @@ export class SubareaApi extends BaseApiManager {
     }
 
     public async getSubareas() {
-        const api = this.getApi();
-        const response = await api.get<Subarea[]>(`/subareas`);
-        return response.data;
+        const response = await this.get<Subarea[]>(`/subareas`);
+        return response;
     }
 }
