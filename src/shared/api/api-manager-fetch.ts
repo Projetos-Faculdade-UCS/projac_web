@@ -41,7 +41,7 @@ export abstract class BaseApiManager {
             }
         );
 
-        return this.responseHandler<T>(resp);
+        return this.responseHandler<T>(resp) as Promise<{ status: number, data: T }>;
     }
 
     /**
@@ -95,10 +95,10 @@ export abstract class BaseApiManager {
 
     }
 
-    private async responseHandler<T>(response: Response, okStatus: number[] = [200, 201]){
+    private async responseHandler<T>(response: Response){
         const res = response as CustomResponse<T>; 
 
-        if ([...okStatus, 400].includes(res.status)) {
+        if ([200, 201, 400].includes(res.status)) {
             const data = res.json();
             return { status: res.status, data: await data };
         }
