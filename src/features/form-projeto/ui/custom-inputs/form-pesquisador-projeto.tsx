@@ -109,7 +109,11 @@ export function FormPesquisadorProjeto({
                     )}
                 />
             </div>
-            <Button variant="link" onClick={() => onRemove(index)}>
+            <Button
+                variant="link"
+                onClick={() => onRemove(index)}
+                className="text-destructive"
+            >
                 <IonIcon name="trash-outline" />
             </Button>
         </div>

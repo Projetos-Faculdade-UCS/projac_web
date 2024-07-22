@@ -68,12 +68,12 @@ const FormsetPesquisadorProjeto = ({ control }: FormsetPesquisadoresProps) => {
                     </div>
                 </ScrollArea>
                 <Button
-                    variant={'ghost'}
+                    variant={'default'}
                     onClick={addPesquisadorProjeto}
                     type="button"
-                    className="mt-1 h-auto w-full bg-accent py-1 text-accent-foreground"
+                    className="mt-1 h-auto w-full py-[0.0625rem]"
                 >
-                    <IonIcon name="add-outline" className="flex text-lg" />
+                    <IonIcon name="add-outline" className="flex text-xl" />
                 </Button>
             </div>
         </div>
