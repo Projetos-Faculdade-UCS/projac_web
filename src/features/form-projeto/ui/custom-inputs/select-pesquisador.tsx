@@ -9,31 +9,52 @@ import {
     SelectValue,
 } from '@/shared/ui/select';
 import { useEffect, useState } from 'react';
+import { Control, useWatch } from 'react-hook-form';
 import { getPesquisadores } from '../../api/server';
+import { ProjetoSchema } from '../../lib/schema';
 
 type SelectPesquisadorProps = {
     value: string;
+    control: Control<ProjetoSchema>;
     onChange: (value: string) => void;
     className?: string;
 };
 
 export function SelectPesquisador({
     value,
+    control,
     onChange,
     className,
 }: SelectPesquisadorProps) {
     const [pesquisadores, setPesquisadores] = useState<Pesquisador[]>([]);
-
+    const pesquisadoresProjetos = useWatch({
+        name: 'pesquisadorProjeto',
+        control,
+    });
     useEffect(() => {
-        getPesquisadores().then((pesquisadores) =>
-            setPesquisadores(pesquisadores),
-        );
-    }, []);
+        const IdsSelecionados = pesquisadoresProjetos
+            ?.map((pesquisadorProjeto) => pesquisadorProjeto.pesquisadorId)
+            .filter((p) => p !== value);
+
+        getPesquisadores().then((pesquisadores) => {
+            pesquisadores = pesquisadores.filter(
+                (pesquisador) =>
+                    !IdsSelecionados?.includes(String(pesquisador.id)),
+            );
+            setPesquisadores(pesquisadores);
+        });
+    }, [pesquisadoresProjetos]);
 
     return (
         <Select onValueChange={onChange} defaultValue={value}>
             <SelectTrigger className={cn('', className)}>
-                <SelectValue placeholder="Selecione um pesquisador" />
+                {value ? (
+                    <SelectValue />
+                ) : (
+                    <span className="text-gray-500">
+                        Selecione um pesquisador
+                    </span>
+                )}
             </SelectTrigger>
             <SelectContent>
                 {pesquisadores.map((pesquisador) => (
