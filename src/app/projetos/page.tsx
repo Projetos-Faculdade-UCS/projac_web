@@ -1,4 +1,6 @@
 import { SidebarOuterTrigger } from '@/entities/side-bar/ui';
+import { ProjetosSearchParams } from '@/features/lista-projetos/lib/types';
+import { obj2key } from '@/features/lista-projetos/lib/utils';
 import { ListaProjetos } from '@/features/lista-projetos/ui';
 import { ListaProjetosSkeleton } from '@/features/lista-projetos/ui/skeleton';
 import { Button } from '@/shared/ui/button';
@@ -6,7 +8,11 @@ import { IonIcon } from '@/shared/ui/ion-icon';
 import Link from 'next/link';
 import { Suspense } from 'react';
 
-export default function ListaProjetosPage() {
+export default function ListaProjetosPage({
+    searchParams,
+}: {
+    searchParams?: ProjetosSearchParams;
+}) {
     return (
         <main className="flex w-full flex-col gap-6 overflow-y-scroll bg-background p-3 text-foreground md:px-10">
             <div className="flex items-center">
@@ -32,8 +38,11 @@ export default function ListaProjetosPage() {
                     </Button>
                 </div>
             </div>
-            <Suspense fallback={<ListaProjetosSkeleton />}>
-                <ListaProjetos />
+            <Suspense
+                key={obj2key(searchParams || {})}
+                fallback={<ListaProjetosSkeleton />}
+            >
+                <ListaProjetos searchParams={searchParams} />
             </Suspense>
         </main>
     );

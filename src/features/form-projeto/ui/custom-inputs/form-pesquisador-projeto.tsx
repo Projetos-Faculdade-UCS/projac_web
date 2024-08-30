@@ -1,5 +1,10 @@
-import { PesquisadorProjeto } from '@/shared/lib/types';
 import { Button } from '@/shared/ui/button';
+import {
+    FormControl,
+    FormField,
+    FormItem,
+    FormMessage,
+} from '@/shared/ui/form';
 import { Input } from '@/shared/ui/input';
 import { IonIcon } from '@/shared/ui/ion-icon';
 import {
@@ -9,61 +14,106 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/shared/ui/select';
-import { ChangeEvent } from 'react';
+import { Control } from 'react-hook-form';
+import { ProjetoSchema } from '../../lib/schema';
 import { SelectPesquisador } from './select-pesquisador';
 
 type FormPesquisadorProjetoProps = {
-    onChange: (value: PesquisadorProjeto) => void;
-    value: PesquisadorProjeto;
-    onRemove?: () => void;
+    control: Control<ProjetoSchema>;
+    index: number;
+    onRemove: (index: number) => void;
 };
 
 export function FormPesquisadorProjeto({
-    value: pesquisadorProjeto,
-    onChange,
+    control,
+    index,
     onRemove,
 }: FormPesquisadorProjetoProps) {
     return (
-        <div className="flex items-center gap-2">
+        <div className="flex items-start">
             <div className="grid grid-cols-1 gap-2 md:grid-cols-3 xl:grid-cols-6">
-                <SelectPesquisador
-                    className="md:col-span-3"
-                    onChange={(pesquisadorId) =>
-                        onChange({ ...pesquisadorProjeto, pesquisadorId })
-                    }
-                    value={pesquisadorProjeto.pesquisadorId}
+                <FormField
+                    control={control}
+                    name={`pesquisadorProjeto.${index}.pesquisadorId`}
+                    render={({ field }) => (
+                        <FormItem className="md:col-span-3">
+                            <FormControl>
+                                <SelectPesquisador
+                                    {...field}
+                                    control={control}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
                 />
-                <Select
-                    onValueChange={(cargo) =>
-                        onChange({ ...pesquisadorProjeto, cargo })
-                    }
-                    defaultValue={pesquisadorProjeto.cargo}
-                >
-                    <SelectTrigger className="md:col-span-2">
-                        <SelectValue placeholder="Selecione um cargo" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="coordenador">
-                            Coordernador
-                        </SelectItem>
-                        <SelectItem value="pesquisador">Pesquisador</SelectItem>
-                        <SelectItem value="colaborador">Colaborador</SelectItem>
-                        <SelectItem value="estagiario">Estagiário</SelectItem>
-                    </SelectContent>
-                </Select>
-                <Input
-                    className="md:col-span-1"
-                    onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        onChange({
-                            ...pesquisadorProjeto,
-                            horas: event.target.valueAsNumber,
-                        })
-                    }
-                    type="number"
-                    value={pesquisadorProjeto.horas}
+
+                <FormField
+                    control={control}
+                    name={`pesquisadorProjeto.${index}.cargo`}
+                    render={({ field }) => (
+                        <FormItem className="md:col-span-2">
+                            <FormControl>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    <SelectTrigger>
+                                        {field.value ? (
+                                            <SelectValue />
+                                        ) : (
+                                            <span className="text-gray-500">
+                                                Selecione um cargo
+                                            </span>
+                                        )}
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="coordenador">
+                                            Coordernador
+                                        </SelectItem>
+                                        <SelectItem value="pesquisador">
+                                            Pesquisador
+                                        </SelectItem>
+                                        <SelectItem value="colaborador">
+                                            Colaborador
+                                        </SelectItem>
+                                        <SelectItem value="estagiario">
+                                            Estagiário
+                                        </SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={control}
+                    name={`pesquisadorProjeto.${index}.horas`}
+                    render={({ field }) => (
+                        <FormItem className="md:col-span-1">
+                            <FormControl>
+                                <Input
+                                    onChange={(e) => {
+                                        field.onChange(Number(e.target.value));
+                                    }}
+                                    type="number"
+                                    value={
+                                        field.value ? field.value : undefined
+                                    }
+                                    placeholder="0"
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
                 />
             </div>
-            <Button variant="link" onClick={onRemove}>
+            <Button
+                variant="link"
+                onClick={() => onRemove(index)}
+                className="text-destructive"
+            >
                 <IonIcon name="trash-outline" />
             </Button>
         </div>
