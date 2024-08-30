@@ -16,7 +16,9 @@ export class PesquisadorApi extends BaseApiManager {
     }
 
     public async getPesquisadores() {
-        const response = await this.get<Pesquisador[]>(`/pesquisadores`);
+        const response = await this.get<Pesquisador[]>(`/pesquisadores`, {
+            cache: "force-cache",
+        });
         return response;
     }
 }

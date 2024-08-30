@@ -38,11 +38,13 @@ export const projetoSchema = z.object({
     subareaIds: z.array(z.string().min(1)).optional(),
     pesquisadorProjeto: z.array(z.object({
         id: z.string().min(1),
-        pesquisadorId: z.string().min(1),
-        cargo: z.string().min(1),
-        horas: z.number().min(1),
+        pesquisadorId: z.string().min(1, { message: "Selecione um pesquisador" }),
+        cargo: z.string().min(1, { message: "Selecione um cargo" }),
+        horas: z.number().gt(0, {
+            message: "Horas deve ser maior que 0"
+        })
     }).required()).optional(),
-    agenciasFomentoIds : z.array(z.string().min(1)).optional(),
+    agenciasFomentoIds: z.array(z.string().min(1)).optional(),
     producoesAcademicas: z.array(z.object({
         id: z.string().min(1),
         titulo: z.string().min(1).max(255),
